@@ -1,5 +1,4 @@
-// App.tsx
-import { useState, useEffect, lazy, Suspense } from "react"; // Remove React import
+import { useState, useEffect, lazy, Suspense } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
@@ -8,8 +7,7 @@ const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
 const isAppBrowser = (() => {
   if (typeof window === "undefined" || typeof navigator === "undefined") {
-    //For server side
-    return false;
+    return false; // Server-side rendering safeguard
   }
   const userAgent =
     navigator.userAgent || (navigator as any).vendor || (window as any).opera;
@@ -21,20 +19,29 @@ const isAppBrowser = (() => {
 })();
 
 export default function App() {
-  const [theme, setTheme] = useState("light"); // Initial state
+  const [theme, setTheme] = useState("light");
+  const [hydrateLCP, setHydrateLCP] = useState(false); // State for LCP hydration
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     setTheme(savedTheme);
-  }, []); // Empty dependency array: runs only once after mount
+  }, []);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
-  }, [theme]); // This effect runs whenever 'theme' changes
+  }, [theme]);
+
+  useEffect(() => {
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(() => setHydrateLCP(true));
+    } else {
+      setTimeout(() => setHydrateLCP(true), 100);
+    }
+  }, []);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light")); // Use functional update
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
   const handleShare = async (title: string, url: string): Promise<void> => {
@@ -43,10 +50,8 @@ export default function App() {
         await navigator.share({ title, url });
         console.log("Content shared successfully");
       } catch (error: any) {
-        // Type 'any' for the error, as its structure varies
         console.error("Error sharing content:", error);
         if (error.name !== "AbortError") {
-          console.error("Share failed:", error);
           alert("Sharing failed. Please try again.");
         }
       }
@@ -78,13 +83,11 @@ export default function App() {
               width="150"
               height="150"
             />
-
             <source
               srcSet="/aitrends.now/profile-image.webp"
               width="100"
               height="100"
             />
-
             <img
               src="/aitrends.now/profile-image.webp"
               alt="Profile picture of aitrends.now"
@@ -96,9 +99,20 @@ export default function App() {
           </picture>
 
           <h1 className="profile-username">aitrends.now</h1>
-          <p className="profile-description">
-            Tech enthusiast. Follow for updates & a shared love for tech.
-          </p>
+
+          {/* Lazy-Hydrate Profile Description */}
+          {hydrateLCP ? (
+            <p className="profile-description">
+              Tech enthusiast. Follow for updates & a shared love for tech.
+            </p>
+          ) : (
+            <p
+              className="profile-description"
+              style={{ visibility: "visible", opacity: "1" }}
+            >
+              Tech enthusiast. Follow for updates & a shared love for tech.
+            </p>
+          )}
         </div>
 
         <div className="links-section">
@@ -108,11 +122,8 @@ export default function App() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {" "}
               <i className="bi bi-threads"></i>
-              {}
               <span>Threads</span>
-              {}
             </a>
             <span
               className="link-options"
@@ -155,11 +166,8 @@ export default function App() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {" "}
               <i className="bi bi-instagram"></i>
-              {}
               <span>Instagram</span>
-              {}
             </a>
             <span
               className="link-options"
@@ -178,11 +186,11 @@ export default function App() {
             <a
               href="#"
               onClick={(e) => {
-                e.preventDefault(); // Prevent default anchor behavior
-                document.getElementById("ebook-download-trigger")?.click(); // Trigger modal
+                e.preventDefault();
+                document.getElementById("ebook-download-trigger")?.click();
               }}
             >
-              <i className="bi bi-incognito"></i>
+              <i className="bi bi-book"></i>
               <span>Mastering Deepseek (eBook)</span>
             </a>
             <span
@@ -209,9 +217,8 @@ export default function App() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {" "}
-              <i className="bi bi-github"></i> {}
-              <span>View Source on GitHub</span> {}
+              <i className="bi bi-github"></i>
+              <span>View Source on GitHub</span>
             </a>
             <span
               className="link-options"
