@@ -191,7 +191,7 @@ export default function App() {
             </span>
 
             {/* Wrap EbookDownload with Suspense */}
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<div>Loading eBook download...</div>}>
               <EbookDownload />
             </Suspense>
           </div>
