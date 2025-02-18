@@ -71,12 +71,30 @@ export default function App() {
 
       <div className="main-content flex-grow-1 d-flex flex-column align-items-center justify-content-center text-center">
         <div className="profile-section">
-          <img
-            src="/aitrends.now/profile-image.webp"
-            alt="Profile picture of aitrends.now"
-            className="profile-image"
-            loading="lazy"
-          />
+          <picture>
+            <source
+              srcSet="/aitrends.now/profile-image.webp"
+              media="(min-width: 1024px)"
+              width="150"
+              height="150"
+            />
+
+            <source
+              srcSet="/aitrends.now/profile-image.webp"
+              width="100"
+              height="100"
+            />
+
+            <img
+              src="/aitrends.now/profile-image.webp"
+              alt="Profile picture of aitrends.now"
+              className="profile-image"
+              loading="lazy"
+              width="100"
+              height="100"
+            />
+          </picture>
+
           <h1 className="profile-username">aitrends.now</h1>
           <p className="profile-description">
             Tech enthusiast. Follow for updates & a shared love for tech.
