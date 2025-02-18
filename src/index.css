@@ -266,13 +266,17 @@ button {
 }
 
 .profile-username {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 50px;
+  font-weight: 800;
+  letter-spacing: -1.44px;
 }
 
 .profile-description {
   font-family: "Google Sans", Arial, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.24px;
+  line-height: 100%;
   line-height: 1.5;
   color: var(--text-color);
   visibility: visible;
