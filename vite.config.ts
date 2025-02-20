@@ -3,19 +3,14 @@ import react from '@vitejs/plugin-react';
 import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import { visualizer } from 'rollup-plugin-visualizer';
 import viteCompression from 'vite-plugin-compression';
-import { imagetools } from 'vite-imagetools'; // Correct import
+import { imagetools } from 'vite-imagetools';
 
 export default defineConfig({
   plugins: [
     react(),
     ViteMinifyPlugin(),
     visualizer({ open: false }),
-    viteCompression({
-      // @ts-ignore - 'headers' is not in the type definition yet
-      headers: {
-        'Cache-Control': 'public, max-age=31536000, immutable',
-      },
-    }),
+    viteCompression(), // No headers needed
     imagetools(),
   ],
   css: {
@@ -26,11 +21,7 @@ export default defineConfig({
       output: {
         assetFileNames: (assetInfo) => {
           const fileName = assetInfo.name || 'default-asset-name';
-          let extType = fileName.split('.').at(-1);
-
-          if (!extType) {
-            extType = 'unknown';
-          }
+          let extType = fileName.split('.').at(-1) || 'unknown';
 
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
             extType = 'img';
@@ -45,5 +36,5 @@ export default defineConfig({
     },
     outDir: 'dist',
   },
-  base: 'https://aitrendsnow.github.io/aitrends.now/',
+  base: '/aitrends.now/', // Fixed base path
 });

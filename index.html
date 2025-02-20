@@ -7,14 +7,16 @@
   <title>aitrends.now - Your Smart Link Hub</title>
   <meta name="description" content="Stay updated with the latest AI trends, tech updates, and useful resources.">
 
-  <link rel="icon" href="/images/favicon.png" sizes="any" type="image/png">
-  <link rel="icon" href="/images/favicon-16x16.png" sizes="16x16" type="image/png">
-  <link rel="icon" href="/images/favicon-32x32.png" sizes="32x32" type="image/png">
-  <link rel="icon" href="/images/favicon-48x48.png" sizes="48x48" type="image/png">
-  <link rel="icon" href="/images/favicon.ico" />
-  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
+  <!-- Favicons (processed by Vite) -->
+  <link rel="icon" href="/src/assets/images/favicon.png" sizes="any" type="image/png">
+  <link rel="icon" href="/src/assets/images/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="/src/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/src/assets/images/favicon-48x48.png" sizes="48x48" type="image/png">
+  <link rel="icon" href="/src/assets/images/favicon.ico" />
+  <link rel="apple-touch-icon" href="/src/assets/images/apple-touch-icon.png" />
+  <link rel="manifest" href="/src/assets/site.webmanifest" />
 
+  <!-- Open Graph and Twitter Cards -->
   <meta property="og:title" content="aitrends.now" />
   <meta property="og:description" content="Tech enthusiast. Follow for updates & a shared love for tech." />
   <meta property="og:image" content="https://aitrendsnow.github.io/aitrends.now/images/social-share.webp" />
@@ -25,22 +27,26 @@
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:site_name" content="aitrends.now" />
-  <meta name="twitter:image" content="https://aitrendsnow.github.io/aitrends.now/images/android-chrome-512x512.png" />
-  <meta name="og:image" content="https://aitrendsnow.github.io/aitrends.now/images/android-chrome-512x512.png" />
-
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="aitrends.now" />
   <meta name="twitter:description" content="Tech enthusiast. Follow for updates & a shared love for tech." />
   <meta name="twitter:image" content="https://aitrendsnow.github.io/aitrends.now/images/social-share.webp" />
   <meta name="twitter:image:alt" content="aitrends.now logo" />
 
-  <link rel="preload" href="/assets/fonts/GoogleSans-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous"
-    importance="high">
+  <!-- Preload critical font (hashed by Vite) -->
+  <!-- Note: Exact hash will be generated post-build; adjust dynamically if needed -->
+  <link rel="preload" href="/src/assets/fonts/GoogleSans-Regular.woff2" as="font" type="font/woff2"
+    crossorigin="anonymous" importance="high">
 
-
-  <link rel="preload" href="/dist/assets/css/index-Cg_Mjs-U.css" as="style">
-
+  <!-- Inline font definition -->
   <style>
+    @font-face {
+      font-family: "Google Sans";
+      src: url("/src/assets/fonts/GoogleSans-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+    }
+
     .profile-description {
       font-family: "Google Sans", Arial, sans-serif;
       font-size: 18px;
@@ -59,6 +65,7 @@
 
 <body>
   <div id="root"></div>
+  <!-- Vite injects the script here during build -->
   <script type="module" src="/src/main.tsx" defer></script>
 </body>
 
