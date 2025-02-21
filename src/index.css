@@ -331,3 +331,6 @@ button {
 .form-control-larger-placeholder {
   /*  Could add specific styles here if needed for larger screens */
 }
+.me-3 {
+  border-radius: 50% !important;
+}

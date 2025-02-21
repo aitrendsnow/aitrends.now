@@ -4,7 +4,7 @@ import { Modal, Button, Form, Image } from "react-bootstrap";
 const EBOOK_DOWNLOAD_URL =
   "https://github.com/user-attachments/files/18716974/Mastering.DeepSeek_.Unleashing.Hidden.Features.Secret.Tricks.Powerful.Prompts.pdf";
 
-const LOGO_PATH = "images/favicon.png";
+const LOGO_PATH = "/aitrends.now/profile-image.webp";
 
 const GOOGLE_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzKz03CLv6V5lePGZpqOOj_Fp6-xP-sug01kXdbLncRuv_ayirbbWLRvB9jdmKA0e8zaA/exec";
