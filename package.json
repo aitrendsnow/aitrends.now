@@ -6,7 +6,7 @@
   "homepage": "https://aitrendsnow.github.io/atrends.now",
   "scripts": {
     "dev": "vite --host",
-    "build": "node subset-fonts.js && tsc -b && vite build && critical dist/index.html --base dist --inline --css dist/assets/css/index-*.css --width 1920 --height 1080 --target-html dist/index.html",
+    "build": "tsc -b && vite build && critical dist/index.html --base dist --inline --css dist/assets/css/index-*.css --width 1920 --height 1080 --target-html dist/index.html",
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy": "vite build && gh-pages -d dist"
@@ -39,7 +39,6 @@
     "gh-pages": "^6.3.0",
     "glob": "^11.0.1",
     "globals": "^15.14.0",
-    "glyphhanger": "^5.0.0",
     "html-minifier": "^4.0.0",
     "html-minifier-terser": "^7.2.0",
     "jsdom": "^26.0.0",
@@ -58,7 +57,6 @@
     "vite": "^6.1.0",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-html": "^3.2.2",
-    "vite-plugin-minify": "^1.5.2",
-    "vite-plugin-run": "^0.6.1"
+    "vite-plugin-minify": "^1.5.2"
   }
 }
