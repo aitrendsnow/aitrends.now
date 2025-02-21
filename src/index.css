@@ -243,6 +243,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 40px; /* Set explicit width */
+  height: 40px; /* Set explicit height */
 }
 
 .theme-switcher-btn i {
@@ -266,9 +268,13 @@ button {
 }
 
 .profile-username {
+  font-family: "Google Sans", Arial, sans-serif;
   font-size: 50px;
   font-weight: 800;
+  display: block;
+  text-align: center;
   letter-spacing: -1.44px;
+  margin-top: 10px;
 }
 
 .profile-description {
