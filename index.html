@@ -40,21 +40,33 @@
     loading="lazy">
   <meta name="twitter:image:alt" content="aitrends.now logo">
 
-  <!-- Preload Fonts -->
-  <link rel="preload" href="/src/assets/fonts/GoogleSans-Regular.woff2" as="font" type="font/woff2"
-    crossorigin="anonymous">
 
-  <!-- Inline Font Definition -->
+
+  <link rel="preload" href="/assets/fonts/GoogleSans-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/assets/fonts/GoogleSans-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/assets/fonts/GoogleSans-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+
+
+
   <style>
     @font-face {
       font-family: "Google Sans";
-      src: url("/src/assets/fonts/GoogleSans-Regular.woff2") format("woff2");
-      font-display: swap;
-      font-weight: 400;
       font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("/assets/fonts/GoogleSans-Regular.woff2") format("woff2");
     }
 
-    /* Improved text rendering */
+    @font-face {
+      font-family: "Google Sans";
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url("/assets/fonts/GoogleSans-Bold.woff2") format("woff2");
+    }
+
+
     .profile-username {
       font-size: 50px;
       font-weight: 800;
