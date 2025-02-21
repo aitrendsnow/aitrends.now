@@ -12,10 +12,10 @@ export default defineConfig({
         imagetools(),
     ],
     css: {
-        // postcss: './postcss.config.cjs', // Only if you need PostCSS
+        postcss: './postcss.config.cjs', // Only if you need PostCSS
     },
     build: {
-        // minify: 'esbuild', // Default, but can be explicitly set
+        minify: 'esbuild', // Default, but can be explicitly set
         rollupOptions: {
             output: {
                 assetFileNames: (assetInfo) => {
