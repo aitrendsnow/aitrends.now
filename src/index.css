@@ -269,6 +269,7 @@ button {
   font-family: "Google Sans", Arial, sans-serif;
   font-size: 50px;
   font-weight: 800;
+  min-height: 30px; /* Adjust as needed */
   display: block;
   text-align: center;
   letter-spacing: -1.44px;
