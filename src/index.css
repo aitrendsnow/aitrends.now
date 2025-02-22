@@ -52,7 +52,6 @@ body {
   flex-direction: column;
   font-size: 16px;
 }
-
 :root {
   font-family: "Google Sans", Inter, system-ui, Avenir, Helvetica, Arial,
     sans-serif;
@@ -81,7 +80,6 @@ html[data-theme="dark"] {
   flex-direction: column;
   min-height: 100vh;
 }
-
 .main-content {
   flex: 1;
   display: flex;
@@ -97,7 +95,6 @@ footer {
   color: var(--footer-text);
   width: 100%;
   height: 50px;
-
   bottom: 0;
   left: 0;
   display: flex;
@@ -135,35 +132,46 @@ a:hover {
 }
 
 h1 {
-  font-size: 2rem; /* Mobile-first size */
+  font-size: 2rem;
   font-weight: 700;
 }
 
 h2 {
-  font-size: 1.75rem; /* Mobile-first size */
+  font-size: 1.75rem;
 }
 
 h3 {
-  font-size: 1.5rem; /* Mobile-first size */
+  font-size: 1.5rem;
 }
 
 p {
-  font-size: 0.9375rem; /* Mobile-first size */
+  font-size: 0.9375rem;
   line-height: 1.6;
 }
 
 button {
   border-radius: 8px;
   border: none;
-  padding: 0.6em 1.2em; /* Adjust as needed */
+  padding: 0.6em 1.2em;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
 }
 
 /* Link Cards */
-.link-card {
+.links-section {
+  width: 100%;
+  max-width: 400px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.link-card {
+  min-height: 50px;
+  max-height: 70px;
+  display: flex;
+  width: 100%;
   align-items: center;
   padding: 1rem;
   margin-bottom: 1rem;
@@ -177,7 +185,6 @@ button {
   position: relative;
   gap: 0.8rem;
 }
-
 .link-card a {
   display: flex;
   font-weight: 400;
@@ -186,7 +193,6 @@ button {
   color: inherit;
   flex: 1;
 }
-
 .link-card svg,
 .link-card i {
   width: 24px;
@@ -194,13 +200,11 @@ button {
   flex-shrink: 0;
   margin-right: 0.8rem;
 }
-
 .link-card span {
   flex: 1;
   display: flex;
   align-items: center;
 }
-
 .link-options {
   position: absolute;
   right: 1rem;
@@ -210,31 +214,29 @@ button {
   color: var(--footer-text);
   cursor: pointer;
 }
-
-.link-card:hover .link-options {
+.link-card:hover.link-options {
   color: var(--text-color);
 }
 
 /* Subtler Pulsating Animation for First Link Card */
 .link-card:first-child {
-  animation: subtlePulseEffect 2.5s infinite ease-in-out; /* Slightly slower animation */
+  animation: subtlePulseEffect 2.5s infinite ease-in-out;
 }
 
 @keyframes subtlePulseEffect {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 4px rgba(100, 108, 255, 0.2); /* Reduced box-shadow intensity */
+    box-shadow: 0 0 4px rgba(100, 108, 255, 0.2);
   }
   50% {
-    transform: scale(1.01); /* Reduced scale increase */
-    box-shadow: 0 0 8px rgba(100, 108, 255, 0.3); /* Reduced box-shadow intensity */
+    transform: scale(1.01);
+    box-shadow: 0 0 8px rgba(100, 108, 255, 0.3);
   }
   100% {
     transform: scale(1);
-    box-shadow: 0 0 4px rgba(100, 108, 255, 0.2); /* Reduced box-shadow intensity */
+    box-shadow: 0 0 4px rgba(100, 108, 255, 0.2);
   }
 }
-
 .theme-switcher-btn {
   background-color: transparent;
   border: none;
@@ -243,20 +245,17 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px; /* Set explicit width */
-  height: 40px; /* Set explicit height */
+  width: 40px;
+  height: 40px;
 }
-
 .theme-switcher-btn i {
   font-size: 1.5rem;
   color: var(--text-color);
   transition: color 0.3s;
 }
-
 .profile-section {
   margin-bottom: 2rem;
 }
-
 .profile-image {
   width: 100px;
   height: 100px;
@@ -266,7 +265,6 @@ button {
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
   margin-bottom: 1rem;
 }
-
 .profile-username {
   font-family: "Google Sans", Arial, sans-serif;
   font-size: 50px;
@@ -276,13 +274,11 @@ button {
   letter-spacing: -1.44px;
   margin-top: 10px;
 }
-
 .profile-description {
   font-family: "Google Sans", Arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
   letter-spacing: -0.24px;
-  line-height: 100%;
   line-height: 1.5;
   color: var(--text-color);
   visibility: visible;
@@ -291,7 +287,6 @@ button {
   content-visibility: auto;
   contain-intrinsic-size: auto 20px;
 }
-
 .links-section {
   width: 100%;
   max-width: 400px;
@@ -316,26 +311,37 @@ button {
   }
 }
 .form-control-larger-placeholder::placeholder {
-  color: gray; /* Or your desired shade of gray */
+  color: gray;
   opacity: 1;
-  font-size: inherit; /* Ensure placeholder also inherits font size */
+  font-size: inherit;
+}
+.form-control-larger-placeholder {
+  font-size: inherit;
 }
 
-.form-control-larger-placeholder {
-  font-size: inherit; /* Ensure input text inherits font size */
-}
 /* Force display of Threads icon - Specificity test */
 .profile-image {
   width: 100px;
   height: 100px;
 }
+
 /* Larger Input Placeholder -  POTENTIAL OVERRIDE */
 .form-control-larger-placeholder::placeholder {
-  /*  Could add specific styles here if needed for larger screens */
+  /* Could add specific styles here if needed for larger screens */
+}
+.form-control-larger-placeholder {
+  /* Could add specific styles here if needed for larger screens */
+}
+.me-3 {
+  border-radius: 50% !important;
 }
 
-.form-control-larger-placeholder {
-  /*  Could add specific styles here if needed for larger screens */
+/* New styles to address the modal shifting */
+.link-card:nth-child(3).modal-container {
+  min-height: 50px; /* Adjust the value to match your modal's height */
+}
+.link-card:nth-child(3) {
+  transition: height 0.3s ease-in-out;
 }
 .me-3 {
   border-radius: 50% !important;

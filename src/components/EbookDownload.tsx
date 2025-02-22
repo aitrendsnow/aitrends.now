@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal, Button, Form, Image } from "react-bootstrap";
+import { Modal, Button, Form, Image } from "react-bootstrap"; // Keep these imports
 
 const EBOOK_DOWNLOAD_URL =
   "https://github.com/user-attachments/files/18716974/Mastering.DeepSeek_.Unleashing.Hidden.Features.Secret.Tricks.Powerful.Prompts.pdf";
@@ -28,19 +28,17 @@ const EbookDownload = () => {
 
       console.log("Submitting data to Google Sheets:", { name, email });
 
-      // ✅ Add `mode: "no-cors"` to temporarily bypass CORS
       const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
-        mode: "no-cors", // 🔥 Temporary fix to bypass CORS for Google Apps Script
+        mode: "no-cors",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ name, email }),
       });
 
-      console.log("Google Script Response:", response); // Debugging line
+      console.log("Google Script Response:", response);
 
-      // ✅ Since `no-cors` blocks response, just assume success for now
       setTimeout(() => {
         const link = document.createElement("a");
         link.href = EBOOK_DOWNLOAD_URL;
@@ -62,32 +60,6 @@ const EbookDownload = () => {
 
   return (
     <>
-      <style type="text/css">
-        {`
-          .form-group-aligned {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 10px;
-            align-items: center;
-          }
-
-          .form-group-aligned .form-label {
-            text-align: right;
-            padding-right: 10px;
-          }
-
-          .form-control-custom-placeholder::placeholder {
-            color: lightgray;
-            opacity: 1;
-            font-size: inherit;
-          }
-
-          .form-control-custom-placeholder {
-            font-size: inherit;
-            padding-left: 10px;
-          }
-        `}
-      </style>
       <Modal
         show={show}
         onHide={() => setShow(false)}

@@ -204,11 +204,6 @@ export default function App() {
             >
               ⋮
             </span>
-
-            {/* Wrap EbookDownload with Suspense */}
-            <Suspense fallback={<div>Loading eBook download...</div>}>
-              <EbookDownload />
-            </Suspense>
           </div>
 
           <div className="link-card special">
@@ -236,6 +231,10 @@ export default function App() {
             </span>
           </div>
         </div>
+        {/* Wrap EbookDownload with Suspense */}
+        <Suspense fallback={<div>Loading eBook download...</div>}>
+          <EbookDownload />
+        </Suspense>
       </div>
 
       <Suspense fallback={<div>Loading Footer...</div>}>
