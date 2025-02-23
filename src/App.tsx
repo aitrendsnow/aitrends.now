@@ -106,10 +106,7 @@ export default function App() {
               Tech enthusiast. Follow for updates & a shared love for tech.
             </p>
           ) : (
-            <p
-              className="profile-description"
-              style={{ visibility: "visible", opacity: "1" }}
-            >
+            <p className="profile-description">
               Tech enthusiast. Follow for updates & a shared love for tech.
             </p>
           )}
