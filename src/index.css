@@ -22,22 +22,6 @@
   src: url("./assets/fonts/GoogleSans-Medium.woff2") format("woff2");
 }
 
-@font-face {
-  font-family: "Google Sans";
-  font-style: italic;
-  font-weight: 500;
-  font-display: swap;
-  src: url("./assets/fonts/GoogleSans-MediumItalic.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Google Sans";
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-  src: url("./assets/fonts/GoogleSans-BoldItalic.woff2") format("woff2");
-}
-
 html,
 body {
   height: 100%;
@@ -269,11 +253,10 @@ button {
   font-family: "Google Sans", Arial, sans-serif;
   font-size: 50px;
   font-weight: 800;
-  min-height: 30px;
-  display: block;
   text-align: center;
   letter-spacing: -1.44px;
   margin-top: 10px;
+  line-height: 1.2;
 }
 .profile-description {
   font-family: "Google Sans", Arial, sans-serif;
