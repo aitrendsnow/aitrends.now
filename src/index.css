@@ -31,8 +31,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: "Google Sans", Inter, system-ui, Avenir, Helvetica, Arial,
-    sans-serif;
+  font-family: "Google Sans", "Helvetica Neue", Arial, sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
