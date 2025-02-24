@@ -1,3 +1,6 @@
+/* /src/index.css */
+
+/* Font Definitions */
 @font-face {
   font-family: "Google Sans";
   font-style: normal;
@@ -22,6 +25,7 @@
   src: url("./assets/fonts/GoogleSans-Medium.woff2") format("woff2");
 }
 
+/* Global Styles */
 html,
 body {
   height: 100%;
@@ -31,22 +35,21 @@ body {
     sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
   display: flex;
   flex-direction: column;
   font-size: 16px;
 }
+
 :root {
-  font-family: "Google Sans", Inter, system-ui, Avenir, Helvetica, Arial,
-    sans-serif;
-  color-scheme: light dark;
   --background-color: #ffffff;
   --text-color: #000000;
   --footer-bg: transparent;
   --footer-text: #6c757d;
   --button-bg: #e9ecef;
-  --button-text: #000;
+  --button-text: #000000;
   --button-hover-border: #646cff;
+  color-scheme: light dark; /* Browser hint for theme support */
 }
 
 html[data-theme="dark"] {
@@ -64,6 +67,7 @@ html[data-theme="dark"] {
   flex-direction: column;
   min-height: 100vh;
 }
+
 .main-content {
   flex: 1;
   display: flex;
@@ -79,12 +83,9 @@ footer {
   color: var(--footer-text);
   width: 100%;
   height: 50px;
-  bottom: 0;
-  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
   padding: 0 20px;
   font-size: 0.7rem;
   box-sizing: border-box;
@@ -93,28 +94,7 @@ footer {
   text-overflow: ellipsis;
 }
 
-@media (max-width: 768px) {
-  footer {
-    font-size: 0.6rem;
-  }
-}
-
-@media (max-width: 480px) {
-  footer {
-    font-size: 0.5rem;
-  }
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-
-a:hover {
-  color: #535bf2;
-}
-
+/* Typography */
 h1 {
   font-size: 2rem;
   font-weight: 700;
@@ -133,6 +113,17 @@ p {
   line-height: 1.6;
 }
 
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+/* Buttons */
 button {
   border-radius: 8px;
   border: none;
@@ -140,6 +131,81 @@ button {
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme Switcher */
+.theme-switcher-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.theme-switcher-btn i.bi {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 24px;
+  color: var(--button-text); /* Use theme variable */
+}
+
+.theme-switcher-btn i.bi::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.theme-switcher-btn:hover i.bi {
+  color: #666; /* Light mode hover */
+}
+
+html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
+  color: #ccc; /* Dark mode hover */
+}
+
+/* Profile Section */
+.profile-section {
+  margin-bottom: 2rem;
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid var(--text-color);
+  object-fit: cover;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1rem;
+}
+
+.profile-username {
+  font-family: "Google Sans", Arial, sans-serif;
+  font-size: 50px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: -1.44px;
+  margin-top: 10px;
+  line-height: 1.2;
+  min-height: 60px; /* Prevents layout shift */
+}
+
+.profile-description {
+  font-family: "Google Sans", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  min-height: 30px;
+  letter-spacing: -0.24px;
+  line-height: 1.5;
+  color: var(--text-color);
 }
 
 /* Link Cards */
@@ -151,6 +217,7 @@ button {
   justify-content: center;
   align-items: center;
 }
+
 .link-card {
   min-height: 50px;
   max-height: 70px;
@@ -163,12 +230,13 @@ button {
   color: var(--text-color);
   border-radius: 8px;
   text-decoration: none;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Consistent timing */
   font-size: 1rem;
   font-weight: 400;
   position: relative;
   gap: 0.8rem;
 }
+
 .link-card a {
   display: flex;
   font-weight: 400;
@@ -177,6 +245,7 @@ button {
   color: inherit;
   flex: 1;
 }
+
 .link-card svg,
 .link-card i {
   width: 24px;
@@ -184,11 +253,13 @@ button {
   flex-shrink: 0;
   margin-right: 0.8rem;
 }
+
 .link-card span {
   flex: 1;
   display: flex;
   align-items: center;
 }
+
 .link-options {
   position: absolute;
   right: 1rem;
@@ -198,11 +269,12 @@ button {
   color: var(--footer-text);
   cursor: pointer;
 }
-.link-card:hover.link-options {
+
+.link-card:hover .link-options {
   color: var(--text-color);
 }
 
-/* Subtler Pulsating Animation for First Link Card */
+/* Subtle Pulse for First Link */
 .link-card:first-child {
   animation: subtlePulseEffect 2.5s infinite ease-in-out;
 }
@@ -221,64 +293,12 @@ button {
     box-shadow: 0 0 4px rgba(100, 108, 255, 0.2);
   }
 }
-.theme-switcher-btn {
-  background-color: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-}
-.theme-switcher-btn i {
-  font-size: 1.5rem;
-  color: var(--text-color);
-  transition: color 0.3s;
-}
-.profile-section {
-  margin-bottom: 2rem;
-}
-.profile-image {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 3px solid var(--text-color);
-  object-fit: cover;
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
-  margin-bottom: 1rem;
-}
-.profile-username {
-  font-family: "Google Sans", Arial, sans-serif;
-  font-size: 50px;
-  font-weight: 700; /* Matches GoogleSans-Bold.woff2 */
-  text-align: center;
-  letter-spacing: -1.44px;
-  margin-top: 10px;
-  line-height: 1.2;
-  min-height: 60px; /* Prevents layout shift */
-}
-.profile-description {
-  font-family: "Google Sans", Arial, sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  min-height: 30px;
-  letter-spacing: -0.24px;
-  line-height: 1.5;
-  color: var(--text-color);
-  visibility: visible !important;
-  opacity: 1 !important;
-  transition: none !important;
-  content-visibility: visible !important;
-  contain-intrinsic-size: auto 20px;
-}
-.links-section {
-  width: 100%;
-  max-width: 400px;
-}
 
+/* Responsive Adjustments */
 @media (max-width: 768px) {
+  footer {
+    font-size: 0.6rem;
+  }
   h1 {
     font-size: 2rem;
   }
@@ -296,39 +316,25 @@ button {
     height: 80px;
   }
 }
+
+@media (max-width: 480px) {
+  footer {
+    font-size: 0.5rem;
+  }
+}
+
+/* Form Inputs */
 .form-control-larger-placeholder::placeholder {
   color: gray;
   opacity: 1;
   font-size: inherit;
 }
+
 .form-control-larger-placeholder {
   font-size: inherit;
 }
 
-/* Force display of Threads icon - Specificity test */
-.profile-image {
-  width: 100px;
-  height: 100px;
-}
-
-/* Larger Input Placeholder -  POTENTIAL OVERRIDE */
-.form-control-larger-placeholder::placeholder {
-  /* Could add specific styles here if needed for larger screens */
-}
-.form-control-larger-placeholder {
-  /* Could add specific styles here if needed for larger screens */
-}
-.me-3 {
-  border-radius: 50% !important;
-}
-
-/* New styles to address the modal shifting */
-.link-card:nth-child(3).modal-container {
-  min-height: 50px; /* Adjust the value to match your modal's height */
-}
-.link-card:nth-child(3) {
-  transition: height 0.3s ease-in-out;
-}
+/* Utility */
 .me-3 {
   border-radius: 50% !important;
 }
