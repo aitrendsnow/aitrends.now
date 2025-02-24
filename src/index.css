@@ -252,23 +252,25 @@ button {
 .profile-username {
   font-family: "Google Sans", Arial, sans-serif;
   font-size: 50px;
-  font-weight: 800;
+  font-weight: 700; /* Matches GoogleSans-Bold.woff2 */
   text-align: center;
   letter-spacing: -1.44px;
   margin-top: 10px;
   line-height: 1.2;
+  min-height: 60px; /* Prevents layout shift */
 }
 .profile-description {
   font-family: "Google Sans", Arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
+  min-height: 30px;
   letter-spacing: -0.24px;
   line-height: 1.5;
   color: var(--text-color);
-  visibility: visible;
-  opacity: 1;
-  transition: opacity 0.2s ease-in-out;
-  content-visibility: auto;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transition: none !important;
+  content-visibility: visible !important;
   contain-intrinsic-size: auto 20px;
 }
 .links-section {

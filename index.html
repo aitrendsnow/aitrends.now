@@ -7,9 +7,7 @@
   <title>aitrends.now - Your Smart Link Hub</title>
   <meta name="description" content="Stay updated with the latest AI trends, tech updates, and useful resources.">
 
-
-
-  <!-- Favicons (processed by Vite) -->
+  <!-- Favicons -->
   <link rel="icon" href="/src/assets/images/favicon.png" sizes="any" type="image/png">
   <link rel="icon" href="/src/assets/images/favicon-16x16.png" sizes="16x16" type="image/png">
   <link rel="icon" href="/src/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -30,53 +28,20 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
   <meta property="og:site_name" content="aitrends.now">
-
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="aitrends.now">
   <meta name="twitter:description" content="Tech enthusiast. Follow for updates & a shared love for tech.">
   <meta name="twitter:image" content="https://aitrendsnow.github.io/aitrends.now/images/social-share.webp">
   <meta name="twitter:image:alt" content="aitrends.now logo">
 
-
-
-
-
-
-
-
-
-  <style>
-    .profile-username {
-      font-family: "Google Sans", Arial, sans-serif;
-      font-size: 50px;
-      font-weight: 800;
-      text-align: center;
-      letter-spacing: -1.44px;
-      margin-top: 10px;
-      line-height: 1.2;
-
-    }
-
-
-    .profile-description {
-      font-family: "Google Sans", Arial, sans-serif;
-      font-size: 18px;
-      font-weight: 400;
-      min-height: 30px;
-      letter-spacing: -0.24px;
-      line-height: 1.5;
-      color: var(--text-color);
-      visibility: visible !important;
-      opacity: 1 !important;
-      transition: none !important;
-      content-visibility: visible !important;
-      contain-intrinsic-size: auto 20px;
-    }
-  </style>
+  <!-- Link to index.css -->
+  <link rel="stylesheet" href="/src/index.css">
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <h1 class="profile-username">aitrends.now</h1> <!-- Pre-rendered fallback -->
+  </div>
 
   <!-- Defer main script -->
   <script type="module" src="/src/main.tsx" defer></script>
