@@ -14,9 +14,14 @@ export default defineConfig({
     imagetools(),
   ],
   css: {
-    postcss: './postcss.config.cjs',
+    postcss: './postcss.config.cjs', // Correct: PostCSS config file
+    preprocessorOptions: {
+      // Remove 'css' here; it's not a preprocessor
+      // If you need charset control, handle it in PostCSS or CSS itself
+    },
   },
   build: {
+    cssCodeSplit: false, // Bundle all CSS into one file
     rollupOptions: {
       output: {
         assetFileNames: (assetInfo) => {
@@ -35,8 +40,15 @@ export default defineConfig({
       },
     },
     outDir: 'dist',
-    sourcemap: true, // Enables source maps for debugging
-    minify: 'terser', // Use Terser for better minification
+    sourcemap: true,
+    minify: 'terser',
+    target: 'esnext',
+    terserOptions: {
+      compress: {
+        drop_console: false,
+        pure_funcs: ['console.log'], // Optional: strip logs in prod
+      },
+    },
   },
-  base: '/aitrends.now/', // Fixed base path for GitHub Pages deployment
+  base: '/aitrends.now/',
 });

@@ -188,14 +188,15 @@ html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
 }
 
 .profile-username {
-  font-family: "Google Sans", Arial, sans-serif;
+  font-family: "Google Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 50px;
   font-weight: 700;
   text-align: center;
   letter-spacing: -1.44px;
   margin-top: 10px;
   line-height: 1.2;
-  min-height: 60px;
+  min-height: 60px; /* Already prevents shift */
+  display: block; /* Ensure consistent rendering */
 }
 
 .profile-description {

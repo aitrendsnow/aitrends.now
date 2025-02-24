@@ -4,7 +4,8 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.hydrateRoot(
+  document.getElementById("root")!,
   <React.StrictMode>
     <App />
   </React.StrictMode>

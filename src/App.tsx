@@ -20,25 +20,17 @@ const isAppBrowser = (() => {
 
 export default function App() {
   const [theme, setTheme] = useState("light");
-  const [hydrateLCP, setHydrateLCP] = useState(false); // State for LCP hydration
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     setTheme(savedTheme);
+    document.documentElement.setAttribute("data-theme", savedTheme);
   }, []);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
-
-  useEffect(() => {
-    if ("requestIdleCallback" in window) {
-      requestIdleCallback(() => setHydrateLCP(true));
-    } else {
-      setTimeout(() => setHydrateLCP(true), 100);
-    }
-  }, []);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
@@ -98,18 +90,10 @@ export default function App() {
             />
           </picture>
 
-          <h1 className="profile-username">aitrends.now</h1>
-
-          {/* Lazy-Hydrate Profile Description */}
-          {hydrateLCP ? (
-            <p className="profile-description">
-              Tech enthusiast. Follow for updates & a shared love for tech.
-            </p>
-          ) : (
-            <p className="profile-description">
-              Tech enthusiast. Follow for updates & a shared love for tech.
-            </p>
-          )}
+          {/* Remove <h1> from here; keep it in index.html */}
+          <p className="profile-description">
+            Tech enthusiast. Follow for updates & a shared love for tech.
+          </p>
         </div>
 
         <div className="links-section">
@@ -228,7 +212,6 @@ export default function App() {
             </span>
           </div>
         </div>
-        {/* Wrap EbookDownload with Suspense */}
         <Suspense fallback={<div>Loading eBook download...</div>}>
           <EbookDownload />
         </Suspense>
@@ -236,9 +219,7 @@ export default function App() {
 
       <Suspense fallback={<div>Loading Footer...</div>}>
         <footer style={{ fontSize: "0.75rem" }}>
-          <p>
-            &copy; {new Date().getFullYear()} aitrends.now. All rights reserved.
-          </p>
+          <p>© {new Date().getFullYear()} aitrends.now. All rights reserved.</p>
         </footer>
       </Suspense>
     </div>
