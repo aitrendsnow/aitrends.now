@@ -274,28 +274,28 @@ html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
   color: var(--text-color);
 }
 
-/* Quick Bounce and Glow for First Link */
+/* Quick Scale Pulse for First Link */
 .link-card:first-child {
-  animation: quickBounceGlow 0.8s infinite ease-in-out;
-  will-change: transform, filter;
+  animation: quickScalePulse 0.8s infinite ease-in-out;
+  will-change: transform, opacity; /* Optimize for GPU */
 }
 
-@keyframes quickBounceGlow {
+@keyframes quickScalePulse {
   0% {
     transform: scale(1);
-    filter: drop-shadow(0 0 2px rgba(100, 108, 255, 0.2));
+    opacity: 0.9;
   }
   30% {
-    transform: scale(1.03);
-    filter: drop-shadow(0 0 6px rgba(100, 108, 255, 0.5));
+    transform: scale(1.05); /* Slightly bigger pop */
+    opacity: 1;
   }
   60% {
     transform: scale(1);
-    filter: drop-shadow(0 0 4px rgba(100, 108, 255, 0.3));
+    opacity: 0.95;
   }
   100% {
     transform: scale(1);
-    filter: drop-shadow(0 0 2px rgba(100, 108, 255, 0.2));
+    opacity: 0.9;
   }
 }
 
