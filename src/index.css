@@ -341,7 +341,7 @@ html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
 
 /* Simple Modal Styles */
 .simple-modal {
-  max-width: 320px; /* Compact for mobile, matches your exact size */
+  max-width: 380px; /* Compact for mobile, matches your exact size */
   width: 90%; /* Responsive width, centered horizontally */
   margin: 0 auto !important; /* Force center horizontally */
   background: var(--background-color);
