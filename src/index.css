@@ -31,8 +31,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: "Google Sans", Helvetica Neue, system-ui, Avenir, Helvetica,
-    Arial, sans-serif;
+  font-family: "Google Sans", "Helvetica Neue", system-ui, Arial, sans-serif; /* Streamlined fallback */
   background-color: var(--background-color);
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -195,8 +194,8 @@ html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
   letter-spacing: -1.44px;
   margin-top: 10px;
   line-height: 1.2;
-  min-height: 60px; /* Already prevents shift */
-  display: block; /* Ensure consistent rendering */
+  min-height: 60px;
+  display: block;
 }
 
 .profile-description {
@@ -336,18 +335,204 @@ html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
   }
 }
 
-/* Form Inputs */
-.form-control-larger-placeholder::placeholder {
-  color: gray;
-  opacity: 1;
-  font-size: inherit;
-}
-
-.form-control-larger-placeholder {
-  font-size: inherit;
-}
-
 /* Utility */
 .me-3 {
   border-radius: 50% !important;
+}
+
+/* Simple Modal Styles */
+.simple-modal {
+  max-width: 320px; /* Compact for mobile, matches your exact size */
+  width: 90%; /* Responsive width, centered horizontally */
+  margin: 0 auto !important; /* Force center horizontally */
+  background: var(--background-color);
+  border-radius: 12px; /* Soft corners, matches your shape */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow, matches your design */
+  /* Ensure centered vertically and horizontally */
+  position: fixed !important; /* Lock in viewport */
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important; /* Absolutely center */
+  z-index: 1050 !important; /* Ensure it’s above other content */
+}
+
+/* Override Bootstrap Modal positioning for precise centering */
+.modal-dialog {
+  display: flex !important; /* Force flex for centering */
+  align-items: center !important; /* Center vertically */
+  justify-content: center !important; /* Center horizontally */
+  min-height: 0 !important; /* Remove min-height to prevent taller background */
+  margin: 0 !important; /* Remove default margins */
+  width: 100% !important; /* Ensure full width for centering */
+  position: relative !important; /* Use relative positioning to maintain exact height */
+}
+
+/* Ensure modal content fits tightly and centers, maintaining exact size, shape, and white background height */
+.modal-content {
+  width: 100% !important; /* Full width within modal-dialog */
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important; /* Center content horizontally */
+}
+
+/* Modal Header */
+.simple-modal-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 1rem !important;
+  border-bottom: none !important; /* No border, matches your design */
+  background: transparent !important;
+  width: 100% !important; /* Full width for centering */
+}
+
+.simple-modal-header .d-flex.flex-column {
+  width: 100%; /* Ensure full width for centering subtext */
+}
+
+.simple-modal-header .d-flex.align-items-center {
+  gap: 1rem !important; /* Maintain gap between logo and title, matches your design */
+}
+
+.modal-logo {
+  border-radius: 50% !important;
+  object-fit: cover !important;
+}
+
+.modal-title {
+  font-family: "Google Sans", "Helvetica Neue", Arial, sans-serif !important;
+  font-size: 1.25rem; /* Slightly smaller for mobile, matches your exact size */
+  font-weight: 700 !important;
+  margin: 0 !important;
+  color: var(--text-color) !important;
+}
+
+/* Close Button Styling */
+.modal-close-btn {
+  padding: 0 !important;
+  font-size: 1.5rem !important;
+  color: #cccccc !important; /* Almost gray, light gray color */
+  text-decoration: none !important;
+  background: none !important;
+  border: none !important;
+  line-height: 1 !important;
+}
+
+.modal-close-btn:hover {
+  color: #999999 !important; /* Slightly darker gray on hover */
+}
+
+/* Position Close Button at Top Right */
+.position-absolute.top-0.end-0.p-3 .modal-close-btn {
+  position: absolute !important;
+  top: 0.75rem !important; /* Adjusted for padding */
+  right: 0.75rem !important; /* Adjusted for padding */
+}
+
+/* Subtext Styling in Header */
+.simple-modal-header .small.text-muted {
+  font-size: 0.875rem !important;
+  color: var(--footer-text) !important;
+  margin-top: 0.5rem !important; /* Space below logo/title, matches your design */
+  width: 100%; /* Ensure full width for centering */
+  text-align: center !important; /* Center the subtext */
+}
+
+/* Modal Body */
+.simple-modal-body {
+  padding: 1rem !important;
+  text-align: center !important;
+  width: 100% !important; /* Full width for centering */
+}
+
+/* Modal Form */
+.modal-form {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important; /* Space between inputs, matches your exact shape */
+  width: 100% !important; /* Ensure full width for centering */
+}
+
+.modal-input {
+  font-family: "Google Sans", "Helvetica Neue", Arial, sans-serif !important;
+  font-size: 1rem !important;
+  padding: 0.5rem 0 !important;
+  border: none !important;
+  border-bottom: 1px solid var(--footer-text) !important; /* Subtle underline, matches your design */
+  background: transparent !important;
+  color: var(--text-color) !important;
+  outline: none !important;
+  transition: border-color 0.3s ease !important;
+  width: 100% !important; /* Full width for centering */
+}
+
+.modal-input:focus {
+  border-bottom: 2px solid var(--button-hover-border) !important; /* Accent on focus */
+}
+
+.modal-input::placeholder {
+  color: var(--footer-text) !important;
+  opacity: 0.8 !important;
+}
+
+.modal-submit-btn {
+  font-family: "Google Sans", "Helvetica Neue", Arial, sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  padding: 0.5rem 1rem !important;
+  background: var(--button-hover-border) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  transition: background 0.3s ease !important;
+  width: fit-content !important; /* Fit content, centered in form */
+  margin: 0 auto !important; /* Center horizontally within form */
+}
+
+.modal-submit-btn:hover {
+  background: #535bf2 !important; /* Darker hover */
+}
+
+.modal-message {
+  font-family: "Google Sans", "Helvetica Neue", Arial, sans-serif !important;
+  font-size: 1rem !important;
+  width: 100% !important; /* Full width for centering */
+  text-align: center !important; /* Ensure text is centered */
+}
+
+.modal-message p {
+  margin: 0.5rem 0 !important;
+}
+
+.modal-message .small {
+  font-size: 0.875rem !important;
+  color: var(--footer-text) !important;
+}
+
+/* Desktop Adjustments */
+@media (min-width: 768px) {
+  .simple-modal {
+    max-width: 400px !important; /* Slightly wider on desktop, matches your exact size */
+  }
+
+  .modal-title {
+    font-size: 1.5rem !important; /* Larger title, matches your exact size */
+  }
+
+  .modal-input {
+    padding: 0.75rem 0 !important; /* More padding, matches your exact shape */
+  }
+
+  .modal-submit-btn {
+    padding: 0.75rem 1.5rem !important; /* Larger button, matches your exact shape */
+  }
+
+  .simple-modal-header .small.text-muted {
+    font-size: 1rem !important; /* Slightly larger on desktop */
+  }
+
+  .position-absolute.top-0.end-0.p-3 .modal-close-btn {
+    top: 1rem !important; /* Adjusted for desktop padding */
+    right: 1rem !important; /* Adjusted for desktop padding */
+  }
 }

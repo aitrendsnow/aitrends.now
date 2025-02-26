@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal, Button, Form, Image } from "react-bootstrap"; // Keep these imports
+import { Modal, Button, Form, Image } from "react-bootstrap";
 
 const EBOOK_DOWNLOAD_URL =
   "https://github.com/user-attachments/files/18716974/Mastering.DeepSeek_.Unleashing.Hidden.Features.Secret.Tricks.Powerful.Prompts.pdf";
@@ -64,80 +64,76 @@ const EbookDownload = () => {
         show={show}
         onHide={() => setShow(false)}
         centered
-        className="border-0"
+        dialogClassName="simple-modal" // Custom class for styling
+        aria-labelledby="modal-title"
       >
-        <Modal.Header className="border-0 pb-0 d-flex flex-column align-items-center position-relative pt-3">
-          <div className="position-absolute top-0 end-0 me-4 mt-4">
-            <Button variant="close" onClick={() => setShow(false)} />
+        <div className="position-absolute top-0 end-0 p-3">
+          <Button
+            variant="link"
+            className="modal-close-btn"
+            onClick={() => setShow(false)}
+            aria-label="Close"
+          >
+            ✕
+          </Button>
+        </div>
+        <Modal.Header className="simple-modal-header">
+          <div className="d-flex flex-column align-items-center w-100">
+            <div className="d-flex align-items-center gap-3 mb-2">
+              <Image
+                src={LOGO_PATH}
+                alt="Ai Trends Logo"
+                height={32}
+                width={32}
+                className="modal-logo"
+              />
+              <Modal.Title as="h5" id="modal-title" className="modal-title">
+                Free eBook Download
+              </Modal.Title>
+            </div>
+            <p className="small text-muted text-center mb-0">
+              Thank you for being here. Our love for tech brought us here!
+            </p>
           </div>
-          <div className="d-flex align-items-center mb-2 mt-2">
-            <Image
-              src={LOGO_PATH}
-              alt="Ai Trends Logo"
-              height={40}
-              className="me-3"
-            />
-            <Modal.Title className="fw-bold fs-5">
-              Get Your Free eBook
-            </Modal.Title>
-          </div>
-          <p className="small text-muted text-center">
-            Thank you for being here. Our love for tech brought us here!
-          </p>
         </Modal.Header>
-        <Modal.Body className="pt-3 pb-4 px-4">
+        <Modal.Body className="simple-modal-body">
           {!submitted ? (
-            <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="name" className="mb-3 form-group-aligned">
-                <Form.Label className="form-label">Full Name:</Form.Label>
+            <Form onSubmit={handleSubmit} className="modal-form">
+              <Form.Group controlId="name" className="mb-3">
                 <Form.Control
                   type="text"
-                  placeholder="Enter your full name"
+                  placeholder="Full Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
-                  className="border-0 rounded-0 shadow-none form-control-custom-placeholder"
-                  style={{
-                    borderBottom: "1px solid #ced4da",
-                    fontSize: "inherit",
-                  }}
+                  className="modal-input"
+                  aria-required="true"
                 />
               </Form.Group>
-              <Form.Group controlId="email" className="mb-4 form-group-aligned">
-                <Form.Label className="form-label">Email Address:</Form.Label>
+              <Form.Group controlId="email" className="mb-4">
                 <Form.Control
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="Email Address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="border-0 rounded-0 shadow-none form-control-custom-placeholder"
-                  style={{
-                    borderBottom: "1px solid #ced4da",
-                    fontSize: "inherit",
-                  }}
+                  className="modal-input"
+                  aria-required="true"
                 />
               </Form.Group>
-              <div className="d-grid">
-                <Button
-                  variant="primary"
-                  type="submit"
-                  className="rounded-0 shadow-none"
-                >
-                  Submit
-                </Button>
-              </div>
+              <Button type="submit" className="modal-submit-btn">
+                Get eBook
+              </Button>
             </Form>
           ) : error ? (
-            <div className="text-center text-danger">
-              <p className="mb-3">An error occurred. Please try again.</p>
+            <div className="modal-message text-danger">
+              <p>Oops! Something went wrong.</p>
               <p className="small">{errorMessage}</p>
             </div>
           ) : (
-            <div className="text-center">
-              <p className="mb-3">
-                Thank you, {name}! Your eBook is being downloaded now.
-              </p>
+            <div className="modal-message text-success">
+              <p>Thanks, {name}!</p>
+              <p className="small">Your eBook is downloading...</p>
             </div>
           )}
         </Modal.Body>
