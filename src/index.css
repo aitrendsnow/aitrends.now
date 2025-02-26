@@ -31,7 +31,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: "Google Sans", Helvetica Neue, system-ui, Arial, sans-serif; /* Streamlined fallback */
+  font-family: "Google Sans", "Helvetica Neue", system-ui, Arial, sans-serif; /* Streamlined fallback */
   background-color: var(--background-color);
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -187,7 +187,7 @@ html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
 }
 
 .profile-username {
-  font-family: "Google Sans", Helvetica Neue, system-ui, Arial, sans-serif; /* Streamlined fallback */
+  font-family: "Google Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 50px;
   font-weight: 700;
   text-align: center;
@@ -199,7 +199,7 @@ html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
 }
 
 .profile-description {
-  font-family: "Google Sans", Helvetica Neue, system-ui, Arial, sans-serif; /* Streamlined fallback */
+  font-family: "Google Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 18px;
   font-weight: 400;
   min-height: 30px;
@@ -232,14 +232,13 @@ html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
   text-decoration: none;
   transition: background-color 0.3s ease, color 0.3s ease;
   font-size: 1rem;
-  font-weight: 400;
+
   position: relative;
   gap: 0.8rem;
 }
 
 .link-card a {
   display: flex;
-  font-weight: 400;
   align-items: center;
   text-decoration: none;
   color: inherit;
