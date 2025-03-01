@@ -19,6 +19,11 @@ const EbookDownload = () => {
   const [downloadReady, setDownloadReady] = useState(false);
   const downloadLinkRef = useRef<HTMLAnchorElement>(null);
   const [downloadTriggered, setDownloadTriggered] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -86,7 +91,7 @@ const EbookDownload = () => {
       </div>
     );
   }
-
+  if (!isClient) return null;
   return (
     <>
       <Modal

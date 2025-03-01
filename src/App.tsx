@@ -7,7 +7,7 @@ const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
 const isAppBrowser = (() => {
   if (typeof window === "undefined" || typeof navigator === "undefined") {
-    return false; // Server-side rendering safeguard
+    return false; // Server-side rendering safeguard (though not needed now)
   }
   const userAgent =
     navigator.userAgent || (navigator as any).vendor || (window as any).opera;
@@ -70,18 +70,18 @@ export default function App() {
         <div className="profile-section">
           <picture>
             <source
-              srcSet="/aitrends.now/profile-image.webp"
+              srcSet="/aitrends.now/profile-image.webp?width=150"
               media="(min-width: 1024px)"
               width="150"
               height="150"
             />
             <source
-              srcSet="/aitrends.now/profile-image.webp"
+              srcSet="/aitrends.now/profile-image.webp?width=100"
               width="100"
               height="100"
             />
             <img
-              src="/aitrends.now/profile-image.webp"
+              src="/aitrends.now/profile-image.webp?width=100"
               alt="Profile picture of aitrends.now"
               className="profile-image"
               loading="lazy"
@@ -89,8 +89,7 @@ export default function App() {
               height="100"
             />
           </picture>
-
-          {/* Remove <h1> from here; keep it in index.html */}
+          <h1 className="profile-username">aitrends.now</h1>
           <p className="profile-description">
             Tech enthusiast. Follow for updates & a shared love for tech.
           </p>
@@ -131,7 +130,10 @@ export default function App() {
             <span
               className="link-options"
               onClick={() =>
-                handleShare("Bluesky", "https://bluesky.social/@aitrends.now")
+                handleShare(
+                  "Bluesky",
+                  "https://bsky.app/profile/aitrendsnow.bsky.social"
+                )
               }
               role="button"
               tabIndex={0}
@@ -212,12 +214,12 @@ export default function App() {
             </span>
           </div>
         </div>
-        <Suspense fallback={<div>Loading eBook download...</div>}>
+        <Suspense fallback={<span>Loading eBook...</span>}>
           <EbookDownload />
         </Suspense>
       </div>
 
-      <Suspense fallback={<div>Loading Footer...</div>}>
+      <Suspense fallback={null}>
         <footer style={{ fontSize: "0.75rem" }}>
           <p>© {new Date().getFullYear()} aitrends.now. All rights reserved.</p>
         </footer>
