@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, ReactNode, useEffect } from "react";
 import { Modal, Button, Form, Image } from "react-bootstrap";
 
 const EBOOK_DOWNLOAD_URL =
@@ -16,6 +16,9 @@ const EbookDownload = () => {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [downloadReady, setDownloadReady] = useState(false);
+  const downloadLinkRef = useRef<HTMLAnchorElement>(null);
+  const [downloadTriggered, setDownloadTriggered] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -39,14 +42,8 @@ const EbookDownload = () => {
 
       console.log("Google Script Response:", response);
 
-      setTimeout(() => {
-        const link = document.createElement("a");
-        link.href = EBOOK_DOWNLOAD_URL;
-        link.download = "MasteringDeepSeek.pdf";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }, 2000);
+      setDownloadReady(true);
+      setSubmitted(false);
     } catch (err) {
       const error = err as Error;
       console.error("Error submitting data:", error);
@@ -58,20 +55,60 @@ const EbookDownload = () => {
     }
   };
 
+  const triggerDownload = () => {
+    if (downloadLinkRef.current) {
+      downloadLinkRef.current.click();
+      setDownloadTriggered(true);
+    }
+  };
+
+  useEffect(() => {
+    if (downloadReady && !downloadTriggered) {
+      triggerDownload();
+    }
+  }, [downloadReady, downloadTriggered]);
+
+  let modalMessageContent: ReactNode = null;
+  if (error) {
+    modalMessageContent = (
+      <div className="modal-message text-danger">
+        <p>Oops! Something went wrong.</p>
+        <p className="small">{errorMessage}</p>
+      </div>
+    );
+  } else if (submitted) {
+    modalMessageContent = <div className="modal-message">Loading...</div>;
+  } else if (downloadReady) {
+    modalMessageContent = (
+      <div className="modal-message text-success">
+        <p>Thanks, {name}!</p>
+        <p className="small">Your eBook is ready for download.</p>
+      </div>
+    );
+  }
+
   return (
     <>
       <Modal
         show={show}
-        onHide={() => setShow(false)}
+        onHide={() => {
+          setShow(false);
+          setDownloadTriggered(false);
+          setDownloadReady(false);
+        }}
         centered
-        dialogClassName="simple-modal" // Custom class for styling
+        dialogClassName="simple-modal"
         aria-labelledby="modal-title"
       >
         <div className="position-absolute top-0 end-0 p-3">
           <Button
             variant="link"
             className="modal-close-btn"
-            onClick={() => setShow(false)}
+            onClick={() => {
+              setShow(false);
+              setDownloadTriggered(false);
+              setDownloadReady(false);
+            }}
             aria-label="Close"
           >
             ✕
@@ -97,7 +134,7 @@ const EbookDownload = () => {
           </div>
         </Modal.Header>
         <Modal.Body className="simple-modal-body">
-          {!submitted ? (
+          {!submitted && !downloadReady && !error ? (
             <Form onSubmit={handleSubmit} className="modal-form">
               <Form.Group controlId="name" className="mb-3">
                 <Form.Control
@@ -119,25 +156,29 @@ const EbookDownload = () => {
                   required
                   className="modal-input"
                   aria-required="true"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  title="Please enter a valid email address"
                 />
               </Form.Group>
-              <Button type="submit" className="modal-submit-btn">
-                Get eBook
+              <Button
+                type="submit"
+                className="modal-submit-btn"
+                disabled={submitted}
+              >
+                {submitted ? "Loading..." : "Get eBook"}
               </Button>
             </Form>
-          ) : error ? (
-            <div className="modal-message text-danger">
-              <p>Oops! Something went wrong.</p>
-              <p className="small">{errorMessage}</p>
-            </div>
           ) : (
-            <div className="modal-message text-success">
-              <p>Thanks, {name}!</p>
-              <p className="small">Your eBook is downloading...</p>
-            </div>
+            modalMessageContent
           )}
         </Modal.Body>
       </Modal>
+      <a
+        href={EBOOK_DOWNLOAD_URL}
+        download="MasteringDeepSeek.pdf"
+        style={{ display: "none" }}
+        ref={downloadLinkRef}
+      ></a>
       <button
         type="button"
         className="d-none"

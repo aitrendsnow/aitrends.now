@@ -407,7 +407,7 @@ html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
 /* Close Button Styling */
 .modal-close-btn {
   padding: 0 !important;
-  font-size: 1.5rem !important;
+  font-size: 1rem !important;
   color: #cccccc !important; /* Almost gray, light gray color */
   text-decoration: none !important;
   background: none !important;
