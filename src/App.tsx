@@ -3,9 +3,39 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
 import ProfileImage from "./assets/profile-image.webp";
-import "./fonts.ts";
+import GoogleSansRegular from "./assets/fonts/GoogleSans-Regular.woff2";
+import GoogleSansMedium from "./assets/fonts/GoogleSans-Medium.woff2";
+import GoogleSansBold from "./assets/fonts/GoogleSans-Bold.woff2";
 
 const EbookDownload = lazy(() => import("./components/EbookDownload"));
+
+// Inject font-face styles dynamically
+const fontStyles = `
+  @font-face {
+    font-family: "Google Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(${GoogleSansRegular}) format("woff2");
+  }
+  @font-face {
+    font-family: "Google Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(${GoogleSansMedium}) format("woff2");
+  }
+  @font-face {
+    font-family: "Google Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(${GoogleSansBold}) format("woff2");
+  }
+`;
+const styleSheet = document.createElement("style");
+styleSheet.textContent = fontStyles;
+document.head.appendChild(styleSheet);
 
 const isAppBrowser = (() => {
   if (typeof window === "undefined" || typeof navigator === "undefined") {
