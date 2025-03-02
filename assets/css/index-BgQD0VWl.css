@@ -1,9 +1,10 @@
+/* index.css (font-face section) */
 @font-face {
   font-family: "Google Sans";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("/assets/fonts/GoogleSans-Regular.woff2") format("woff2");
+  src: url("./assets/fonts/GoogleSans-Regular.woff2") format("woff2");
 }
 
 @font-face {
@@ -11,7 +12,7 @@
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url("/assets/fonts/GoogleSans-Medium.woff2") format("woff2");
+  src: url("./assets/fonts/GoogleSans-Medium.woff2") format("woff2");
 }
 
 @font-face {
@@ -19,7 +20,7 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url("/assets/fonts/GoogleSans-Bold.woff2") format("woff2");
+  src: url("./assets/fonts/GoogleSans-Bold.woff2") format("woff2");
 }
 
 :root {
