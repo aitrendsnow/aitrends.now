@@ -145,7 +145,7 @@ html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
   border-radius: 50%;
   border: 3px solid var(--text-color);
   object-fit: cover;
-  box-shadow: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0.5rem 0.1rem var(--shadow-color); /* Rounded, uniform shadow */
 }
 
 .profile-username {
