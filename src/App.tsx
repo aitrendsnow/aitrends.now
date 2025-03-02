@@ -9,34 +9,6 @@ import GoogleSansBold from "./assets/fonts/GoogleSans-Bold.woff2";
 
 const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
-// Inject font-face styles dynamically
-const fontStyles = `
-  @font-face {
-    font-family: "Google Sans";
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(${GoogleSansRegular}) format("woff2");
-  }
-  @font-face {
-    font-family: "Google Sans";
-    font-style: normal;
-    font-weight: 500;
-    font-display: swap;
-    src: url(${GoogleSansMedium}) format("woff2");
-  }
-  @font-face {
-    font-family: "Google Sans";
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-    src: url(${GoogleSansBold}) format("woff2");
-  }
-`;
-const styleSheet = document.createElement("style");
-styleSheet.textContent = fontStyles;
-document.head.appendChild(styleSheet);
-
 const isAppBrowser = (() => {
   if (typeof window === "undefined" || typeof navigator === "undefined") {
     return false;
@@ -52,6 +24,41 @@ const isAppBrowser = (() => {
 
 export default function App() {
   const [theme, setTheme] = useState("light");
+
+  // Inject font-face styles dynamically
+  useEffect(() => {
+    const fontStyles = `
+      @font-face {
+        font-family: "Google Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(${GoogleSansRegular}) format("woff2");
+      }
+      @font-face {
+        font-family: "Google Sans";
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url(${GoogleSansMedium}) format("woff2");
+      }
+      @font-face {
+        font-family: "Google Sans";
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url(${GoogleSansBold}) format("woff2");
+      }
+    `;
+    const styleSheet = document.createElement("style");
+    styleSheet.textContent = fontStyles;
+    document.head.appendChild(styleSheet);
+
+    // Cleanup to avoid duplicates on re-renders
+    return () => {
+      document.head.removeChild(styleSheet);
+    };
+  }, []); // Empty dependency array to run once on mount
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
