@@ -2,7 +2,7 @@ import { useState, useEffect, lazy, Suspense } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
-import ProfileImage from "./assets/profile-image.webp"; // Ensure this path matches the file location
+import ProfileImage from "./assets/profile-image.webp";
 
 const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
