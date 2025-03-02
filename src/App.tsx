@@ -7,7 +7,7 @@ const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
 const isAppBrowser = (() => {
   if (typeof window === "undefined" || typeof navigator === "undefined") {
-    return false; // Server-side rendering safeguard (though not needed now)
+    return false;
   }
   const userAgent =
     navigator.userAgent || (navigator as any).vendor || (window as any).opera;
@@ -52,6 +52,14 @@ export default function App() {
     }
   };
 
+  // Explicitly use the full base path (works with public/)
+  const imageSrc = import.meta.env.DEV
+    ? "/aitrends.now/profile-image.webp"
+    : "/aitrends.now/profile-image.webp?width=80&format=webp";
+  const imageSrcSet = import.meta.env.DEV
+    ? "/aitrends.now/profile-image.webp"
+    : "/aitrends.now/profile-image.webp?width=120&format=webp";
+
   return (
     <div className="wrapper d-flex flex-column min-vh-100">
       <button
@@ -70,23 +78,18 @@ export default function App() {
         <div className="profile-section">
           <picture>
             <source
-              srcSet="/aitrends.now/profile-image.webp?width=150"
+              srcSet={imageSrcSet}
               media="(min-width: 1024px)"
-              width="150"
-              height="150"
-            />
-            <source
-              srcSet="/aitrends.now/profile-image.webp?width=100"
-              width="100"
-              height="100"
+              width="120"
+              height="120"
             />
             <img
-              src="/aitrends.now/profile-image.webp?width=100"
+              src={imageSrc}
               alt="Profile picture of aitrends.now"
               className="profile-image"
-              loading="lazy"
-              width="100"
-              height="100"
+              loading="eager"
+              width="80"
+              height="80"
             />
           </picture>
           <h1 className="profile-username">aitrends.now</h1>
@@ -219,11 +222,9 @@ export default function App() {
         </Suspense>
       </div>
 
-      <Suspense fallback={null}>
-        <footer style={{ fontSize: "0.75rem" }}>
-          <p>© {new Date().getFullYear()} aitrends.now. All rights reserved.</p>
-        </footer>
-      </Suspense>
+      <footer style={{ fontSize: "0.75rem" }}>
+        <p>© {new Date().getFullYear()} aitrends.now. All rights reserved.</p>
+      </footer>
     </div>
   );
 }
