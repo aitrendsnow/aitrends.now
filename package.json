@@ -3,10 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://aitrendsnow.github.io/atrends.now",
+  "homepage": "https://aitrendsnow.github.io/aitrends.now",
   "scripts": {
     "dev": "vite --host",
-    "build": "tsc -b && vite build && critical dist/index.html --base dist --inline --css dist/assets/css/index-*.css --width 1920 --height 1080 --target-html dist/index.html",
+    "build": "tsc -b && vite build && critical dist/index.html --base dist --inline --extract --css dist/assets/index-*.css --width 1440 --height 900 --target dist/index.html && node scripts/inject-preload.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy": "vite build && gh-pages -d dist"
@@ -34,6 +34,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "gh-pages": "^6.3.0",
+    "glob": "^11.0.0",
     "globals": "^15.14.0",
     "postcss": "^8.5.1",
     "rollup": "^4.34.5",
@@ -43,5 +44,13 @@
     "vite": "^6.1.0",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-minify": "^1.5.2"
+  },
+  "overrides": {
+    "penthouse": {
+      "puppeteer": "^24.3.0"
+    },
+    "rimraf": "^6.0.1",
+    "glob": "^11.0.0",
+    "inflight": "^1.0.6"
   }
 }
