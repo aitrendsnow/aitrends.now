@@ -2,6 +2,7 @@ import { useState, useEffect, lazy, Suspense } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
+import ProfileImage from "./assets/profile-image.webp"; // Ensure this path matches the file location
 
 const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
@@ -52,13 +53,12 @@ export default function App() {
     }
   };
 
-  // Explicitly use the full base path (works with public/)
   const imageSrc = import.meta.env.DEV
-    ? "/aitrends.now/profile-image.webp"
-    : "/aitrends.now/profile-image.webp?width=80&format=webp";
+    ? ProfileImage
+    : `${ProfileImage}?width=80&format=webp`;
   const imageSrcSet = import.meta.env.DEV
-    ? "/aitrends.now/profile-image.webp"
-    : "/aitrends.now/profile-image.webp?width=120&format=webp";
+    ? ProfileImage
+    : `${ProfileImage}?width=120&format=webp`;
 
   return (
     <div className="wrapper d-flex flex-column min-vh-100">
