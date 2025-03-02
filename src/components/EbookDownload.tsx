@@ -1,4 +1,5 @@
 import { useState, useRef, ReactNode, useEffect } from "react";
+import React from "react"; // Import React!
 import { Modal, Button, Form, Image } from "react-bootstrap";
 
 const EBOOK_DOWNLOAD_URL =

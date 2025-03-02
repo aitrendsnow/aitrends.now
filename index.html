@@ -51,16 +51,28 @@
       text-align: center;
     }
 
+    .profile-section picture {
+      display: block;
+      width: 6.25rem;
+      height: 6.25rem;
+      margin: 0 auto 1rem;
+      overflow: hidden;
+    }
+
     .profile-image {
       width: 80px;
       height: 80px;
       border-radius: 50%;
     }
 
+
+
     .profile-username {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin: 0.5rem 0;
+      font-size: 3.125rem;
+      font-weight: 700;
+      letter-spacing: -0.09rem;
+      line-height: 1.2;
+      margin: 0.625rem 0 0;
     }
 
     .profile-description {
@@ -80,6 +92,7 @@
   </style>
   <!-- CSS -->
   <link rel="stylesheet" href="/src/index.css" fetchpriority="high" media="print" onload="this.media='all'">
+  <link rel="preload" href="/assets/fonts/GoogleSans-Bold-[hash].woff2" as="font" type="font/woff2" crossorigin>
 
 </head>
 
