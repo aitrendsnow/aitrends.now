@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
 import ProfileImage from "./assets/profile-image.webp";
+import "./fonts.ts";
 
 const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
