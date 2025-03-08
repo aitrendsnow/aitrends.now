@@ -2,7 +2,7 @@ import { useState, useEffect, lazy, Suspense } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
-import ProfileImage from "./assets/profile-image.webp";
+import ProfileImage from "./assets/profile-image.webp"; // Original source
 
 const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
@@ -93,13 +93,6 @@ export default function App() {
     },
   ];
 
-  const imageSrc = import.meta.env.DEV
-    ? ProfileImage
-    : "/assets/webp/profile-image-optimized.webp";
-  const imageSrcSet = import.meta.env.DEV
-    ? ProfileImage
-    : "/assets/webp/profile-image-optimized.webp 120w";
-
   return (
     <div className="wrapper d-flex flex-column min-vh-100">
       <button
@@ -118,13 +111,13 @@ export default function App() {
         <div className="profile-section">
           <picture>
             <source
-              srcSet={imageSrcSet}
+              srcSet={`${ProfileImage}?width=120&format=webp`}
               media="(min-width: 1024px)"
               width="120"
               height="120"
             />
             <img
-              src={imageSrc}
+              src={`${ProfileImage}?width=80&format=webp`}
               alt="Profile picture of aitrends.now"
               className="profile-image"
               loading="eager"

@@ -12,10 +12,12 @@ export default defineConfig(({ mode }) => ({
     viteCompression({ algorithm: 'brotliCompress' }),
     imagetools({
       defaultDirectives: (url) => {
+        // Apply to profile-image.webp in production
         if (mode === 'production' && url.pathname.includes('profile-image.webp')) {
           return new URLSearchParams({
-            width: url.searchParams.get('width') || '80',
-            format: 'webp',
+            width: url.searchParams.get('width') || '80', // Default width
+            format: 'webp', // Ensure WebP output
+            quality: '60', // Match your cwebp -q 60
           });
         }
         return new URLSearchParams();
@@ -43,7 +45,8 @@ export default defineConfig(({ mode }) => ({
         assetFileNames: (assetInfo) => {
           const fileName = assetInfo.name || 'default-asset-name';
           let extType = fileName.split('.').pop() || 'unknown';
-          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) extType = 'img';
+          // Map image extensions to 'webp' folder (since imagetools outputs WebP)
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico|webp/i.test(extType)) extType = 'webp';
           else if (/woff|woff2/.test(extType)) extType = 'fonts';
           return `assets/${extType}/[name]-[hash][extname]`;
         },
@@ -59,5 +62,5 @@ export default defineConfig(({ mode }) => ({
       compress: { drop_console: true },
     },
   },
-  base: '/aitrends.now/',
+  base: '/aitrends.now/', // Correct for GitHub Pages
 }));
