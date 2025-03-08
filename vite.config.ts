@@ -59,8 +59,7 @@ export default defineConfig(({ mode }) => ({
     terserOptions: {
       compress: { drop_console: true },
     },
-    // Ensure assets are copied
-    assetsInlineLimit: 0, // Force all assets to be emitted as files
+    assetsInlineLimit: 0,
   },
   base: '/aitrends.now/',
 }));
