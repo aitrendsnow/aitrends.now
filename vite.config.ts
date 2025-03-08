@@ -12,12 +12,11 @@ export default defineConfig(({ mode }) => ({
     viteCompression({ algorithm: 'brotliCompress' }),
     imagetools({
       defaultDirectives: (url) => {
-        // Apply to profile-image.webp in production
         if (mode === 'production' && url.pathname.includes('profile-image.webp')) {
           return new URLSearchParams({
-            width: url.searchParams.get('width') || '80', // Default width
-            format: 'webp', // Ensure WebP output
-            quality: '60', // Match your cwebp -q 60
+            width: '80',
+            format: 'webp',
+            quality: '60',
           });
         }
         return new URLSearchParams();
@@ -45,7 +44,6 @@ export default defineConfig(({ mode }) => ({
         assetFileNames: (assetInfo) => {
           const fileName = assetInfo.name || 'default-asset-name';
           let extType = fileName.split('.').pop() || 'unknown';
-          // Map image extensions to 'webp' folder (since imagetools outputs WebP)
           if (/png|jpe?g|svg|gif|tiff|bmp|ico|webp/i.test(extType)) extType = 'webp';
           else if (/woff|woff2/.test(extType)) extType = 'fonts';
           return `assets/${extType}/[name]-[hash][extname]`;
@@ -61,6 +59,8 @@ export default defineConfig(({ mode }) => ({
     terserOptions: {
       compress: { drop_console: true },
     },
+    // Ensure assets are copied
+    assetsInlineLimit: 0, // Force all assets to be emitted as files
   },
-  base: '/aitrends.now/', // Correct for GitHub Pages
+  base: '/aitrends.now/',
 }));

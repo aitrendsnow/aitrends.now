@@ -2,7 +2,7 @@ import { useState, useEffect, lazy, Suspense } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
-import ProfileImage from "./assets/profile-image.webp"; // Original source
+import ProfileImage from "./assets/profile-image.webp";
 
 const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
@@ -111,13 +111,13 @@ export default function App() {
         <div className="profile-section">
           <picture>
             <source
-              srcSet={`${ProfileImage}?width=120&format=webp`}
+              srcSet={`${ProfileImage}?width=120`}
               media="(min-width: 1024px)"
               width="120"
               height="120"
             />
             <img
-              src={`${ProfileImage}?width=80&format=webp`}
+              src={ProfileImage}
               alt="Profile picture of aitrends.now"
               className="profile-image"
               loading="eager"
