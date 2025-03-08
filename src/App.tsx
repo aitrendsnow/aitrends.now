@@ -3,6 +3,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
 import ProfileImage from "./assets/profile-image.webp";
+// Import fonts to ensure Vite includes them, suppress unused warnings
+// @ts-ignore
+import GoogleSansRegular from "./assets/fonts/GoogleSans-Regular-Djvx7XI4.woff2";
+// @ts-ignore
+import GoogleSansMedium from "./assets/fonts/GoogleSans-Medium-krSl1Cbs.woff2";
+// @ts-ignore
+import GoogleSansBold from "./assets/fonts/GoogleSans-Bold-DdUpYAm4.woff2";
 
 const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
