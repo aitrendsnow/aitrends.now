@@ -2,7 +2,7 @@ import { useState, useEffect, lazy, Suspense } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
-import ProfileImage from "./assets/profile-image.webp"; // Original source
+import ProfileImage from "./assets/profile-image.webp";
 
 const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
@@ -95,7 +95,7 @@ export default function App() {
 
   const imageSrc = import.meta.env.DEV
     ? ProfileImage
-    : "/assets/webp/profile-image-optimized.webp"; // Optimized image
+    : "/assets/webp/profile-image-optimized.webp";
   const imageSrcSet = import.meta.env.DEV
     ? ProfileImage
     : "/assets/webp/profile-image-optimized.webp 120w";
