@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
 import ProfileImage from "./assets/profile-image.webp";
-// Import fonts to ensure Vite includes them, suppress unused warnings
 // @ts-ignore
 import GoogleSansRegular from "./assets/fonts/GoogleSans-Regular-Djvx7XI4.woff2";
 // @ts-ignore
