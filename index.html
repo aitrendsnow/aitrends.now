@@ -36,7 +36,9 @@
   <link rel="preload" href="/assets/fonts/GoogleSans-Regular-Djvx7XI4.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/assets/fonts/GoogleSans-Medium-krSl1Cbs.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/assets/fonts/GoogleSans-Bold-DdUpYAm4.woff2" as="font" type="font/woff2" crossorigin />
-
+  <!-- Preload Bootstrap Icons -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/fonts/bootstrap-icons.woff2"
+    as="font" type="font/woff2" crossorigin />
   <style>
     @font-face {
       font-family: "Google Sans";
@@ -61,70 +63,12 @@
       font-display: swap;
       src: url("/assets/fonts/GoogleSans-Bold-DdUpYAm4.woff2") format("woff2");
     }
-
-    .wrapper {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    .main-content {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .profile-section picture {
-      display: block;
-      width: 6.25rem;
-      height: 6.25rem;
-      margin: 0 auto 1rem;
-      overflow: hidden;
-    }
-
-    .profile-image {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-    }
-
-
-
-    .profile-username {
-      font-size: 3.125rem;
-      font-weight: 700;
-      letter-spacing: -0.09rem;
-      line-height: 1.2;
-      margin: 0.625rem 0 0;
-    }
-
-    .profile-description {
-      margin-bottom: 1rem;
-    }
-
-    .theme-switcher-btn {
-      position: absolute;
-      top: 0;
-      right: 0;
-      margin: 1rem;
-      border: none;
-      background: none;
-      font-size: 1.25rem;
-      cursor: pointer;
-    }
   </style>
-  <!-- CSS -->
-  <link rel="stylesheet" href="/src/index.css" fetchpriority="high" media="print" onload="this.media='all'">
-
-
 </head>
 
 <body>
   <div id="root"></div>
-  <script type="module" src="/src/main.tsx" defer></script>
+  <script type="module" src="/src/main.tsx"></script>
 </body>
 
 </html>
