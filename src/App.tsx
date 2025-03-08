@@ -2,10 +2,7 @@ import { useState, useEffect, lazy, Suspense } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
-import ProfileImage from "./assets/profile-image.webp";
-import GoogleSansRegular from "./assets/fonts/GoogleSans-Regular.woff2";
-import GoogleSansMedium from "./assets/fonts/GoogleSans-Medium.woff2";
-import GoogleSansBold from "./assets/fonts/GoogleSans-Bold.woff2";
+import ProfileImage from "./assets/profile-image.webp"; // Original source
 
 const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
@@ -24,41 +21,6 @@ const isAppBrowser = (() => {
 
 export default function App() {
   const [theme, setTheme] = useState("light");
-
-  // Inject font-face styles dynamically
-  useEffect(() => {
-    const fontStyles = `
-      @font-face {
-        font-family: "Google Sans";
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
-        src: url(${GoogleSansRegular}) format("woff2");
-      }
-      @font-face {
-        font-family: "Google Sans";
-        font-style: normal;
-        font-weight: 500;
-        font-display: swap;
-        src: url(${GoogleSansMedium}) format("woff2");
-      }
-      @font-face {
-        font-family: "Google Sans";
-        font-style: normal;
-        font-weight: 700;
-        font-display: swap;
-        src: url(${GoogleSansBold}) format("woff2");
-      }
-    `;
-    const styleSheet = document.createElement("style");
-    styleSheet.textContent = fontStyles;
-    document.head.appendChild(styleSheet);
-
-    // Cleanup to avoid duplicates on re-renders
-    return () => {
-      document.head.removeChild(styleSheet);
-    };
-  }, []); // Empty dependency array to run once on mount
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
@@ -91,12 +53,52 @@ export default function App() {
     }
   };
 
+  const handleLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    action?: string
+  ) => {
+    if (action === "triggerEbookDownload") {
+      e.preventDefault();
+      document.getElementById("ebook-download-trigger")?.click();
+    }
+  };
+
+  const socialLinks = [
+    {
+      platform: "Threads",
+      url: "https://threads.net/@aitrends.now",
+      icon: "bi-threads",
+    },
+    {
+      platform: "Bluesky",
+      url: "https://bsky.app/profile/aitrendsnow.bsky.social",
+      icon: "bi-chat-square-text",
+    },
+    {
+      platform: "Instagram",
+      url: "https://instagram.com/aitrends.now",
+      icon: "bi-instagram",
+    },
+    {
+      platform: "Mastering Deepseek (eBook)",
+      url: "#ebook",
+      icon: "bi-book",
+      action: "triggerEbookDownload",
+    },
+    {
+      platform: "GitHub",
+      url: "https://github.com/aitrendsnow/aitrends.now",
+      icon: "bi-github",
+      special: true,
+    },
+  ];
+
   const imageSrc = import.meta.env.DEV
     ? ProfileImage
-    : `${ProfileImage}?width=80&format=webp`;
+    : "/assets/webp/profile-image-optimized.webp"; // Optimized image
   const imageSrcSet = import.meta.env.DEV
     ? ProfileImage
-    : `${ProfileImage}?width=120&format=webp`;
+    : "/assets/webp/profile-image-optimized.webp 120w";
 
   return (
     <div className="wrapper d-flex flex-column min-vh-100">
@@ -137,123 +139,31 @@ export default function App() {
         </div>
 
         <div className="links-section">
-          <div className="link-card">
-            <a
-              href="https://threads.net/@aitrends.now"
-              target="_blank"
-              rel="noopener noreferrer"
+          {socialLinks.map((link, index) => (
+            <div
+              className={`link-card ${link.special ? "special" : ""}`}
+              key={index}
             >
-              <i className="bi bi-threads"></i>
-              <span>Threads</span>
-            </a>
-            <span
-              className="link-options"
-              onClick={() =>
-                handleShare("Threads", "https://threads.net/@aitrends.now")
-              }
-              role="button"
-              tabIndex={0}
-              aria-label="Share Threads link"
-            >
-              ⋮
-            </span>
-          </div>
-
-          <div className="link-card">
-            <a
-              href="https://bsky.app/profile/aitrendsnow.bsky.social"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="bi bi-chat-square-text"></i>
-              <span>Bluesky</span>
-            </a>
-            <span
-              className="link-options"
-              onClick={() =>
-                handleShare(
-                  "Bluesky",
-                  "https://bsky.app/profile/aitrendsnow.bsky.social"
-                )
-              }
-              role="button"
-              tabIndex={0}
-              aria-label="Share Bluesky link"
-            >
-              ⋮
-            </span>
-          </div>
-
-          <div className="link-card">
-            <a
-              href="https://instagram.com/aitrends.now"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="bi bi-instagram"></i>
-              <span>Instagram</span>
-            </a>
-            <span
-              className="link-options"
-              onClick={() =>
-                handleShare("Instagram", "https://instagram.com/aitrends.now")
-              }
-              role="button"
-              tabIndex={0}
-              aria-label="Share Instagram link"
-            >
-              ⋮
-            </span>
-          </div>
-
-          <div className="link-card">
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById("ebook-download-trigger")?.click();
-              }}
-            >
-              <i className="bi bi-book"></i>
-              <span>Mastering Deepseek (eBook)</span>
-            </a>
-            <span
-              className="link-options"
-              onClick={() =>
-                handleShare("Download your eBook", "https://aitrends.now/ebook")
-              }
-              role="button"
-              tabIndex={0}
-              aria-label="Share eBook link"
-            >
-              ⋮
-            </span>
-          </div>
-
-          <div className="link-card special">
-            <a
-              href="https://github.com/aitrendsnow/aitrends.now"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="bi bi-github"></i>
-              <span>View Source on GitHub</span>
-            </a>
-            <span
-              className="link-options"
-              onClick={() =>
-                handleShare(
-                  "View Source on GitHub",
-                  "https://github.com/aitrendsnow/aitrends.now"
-                )
-              }
-              role="button"
-              tabIndex={0}
-              aria-label="Share GitHub link"
-            >
-              ⋮
-            </span>
-          </div>
+              <a
+                href={link.url}
+                target={link.action ? "_self" : "_blank"}
+                rel={link.action ? "" : "noopener noreferrer"}
+                onClick={(e) => handleLinkClick(e, link.action)}
+              >
+                <i className={`bi ${link.icon}`}></i>
+                <span>{link.platform}</span>
+              </a>
+              <span
+                className="link-options"
+                onClick={() => handleShare(link.platform, link.url)}
+                role="button"
+                tabIndex={0}
+                aria-label={`Share ${link.platform} link`}
+              >
+                ⋮
+              </span>
+            </div>
+          ))}
         </div>
         <Suspense fallback={<span>Loading eBook...</span>}>
           <EbookDownload />
