@@ -15,7 +15,13 @@ async function injectPreload() {
   const cssFile = cssFiles.find(
     (file) => file.startsWith("index-") && file.endsWith(".css")
   );
-  const fontFile = fontFiles.find(
+  const fontRegular = fontFiles.find(
+    (file) => file.startsWith("GoogleSans-Regular-") && file.endsWith(".woff2")
+  );
+  const fontMedium = fontFiles.find(
+    (file) => file.startsWith("GoogleSans-Medium-") && file.endsWith(".woff2")
+  );
+  const fontBold = fontFiles.find(
     (file) => file.startsWith("GoogleSans-Bold-") && file.endsWith(".woff2")
   );
   const imageFile = imageFiles.find(
@@ -23,21 +29,33 @@ async function injectPreload() {
   );
 
   let html = await fs.readFile(htmlPath, "utf-8");
+
   if (cssFile) {
     const cssPreloadTag = `<link rel="preload" href="/aitrends.now/assets/css/${cssFile}" as="style" onload="this.rel='stylesheet'">\n  `;
     html = html.replace("</head>", `${cssPreloadTag}</head>`);
     console.log("CSS preload tag injected for", cssFile);
   }
-  if (fontFile) {
-    const fontPreloadTag = `<link rel="preload" href="/aitrends.now/assets/fonts/${fontFile}" as="font" type="font/woff2" crossorigin>\n  `;
+  if (fontRegular) {
+    const fontPreloadTag = `<link rel="preload" href="/aitrends.now/assets/fonts/${fontRegular}" as="font" type="font/woff2" crossorigin>\n  `;
     html = html.replace("</head>", `${fontPreloadTag}</head>`);
-    console.log("Font preload tag injected for", fontFile);
+    console.log("Font preload tag injected for", fontRegular);
+  }
+  if (fontMedium) {
+    const fontPreloadTag = `<link rel="preload" href="/aitrends.now/assets/fonts/${fontMedium}" as="font" type="font/woff2" crossorigin>\n  `;
+    html = html.replace("</head>", `${fontPreloadTag}</head>`);
+    console.log("Font preload tag injected for", fontMedium);
+  }
+  if (fontBold) {
+    const fontPreloadTag = `<link rel="preload" href="/aitrends.now/assets/fonts/${fontBold}" as="font" type="font/woff2" crossorigin>\n  `;
+    html = html.replace("</head>", `${fontPreloadTag}</head>`);
+    console.log("Font preload tag injected for", fontBold);
   }
   if (imageFile) {
     const imagePreloadTag = `<link rel="preload" href="/aitrends.now/assets/webp/${imageFile}" as="image">\n  `;
     html = html.replace("</head>", `${imagePreloadTag}</head>`);
     console.log("Image preload tag injected for", imageFile);
   }
+
   await fs.writeFile(htmlPath, html, "utf-8");
 }
 

@@ -1,33 +1,27 @@
+/* src/index.css */
 @font-face {
   font-family: "Google Sans";
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
-  src: url("/aitrends.now/assets/fonts/GoogleSans-Regular-Djvx7XI4.woff2")
-    format("woff2");
+  src: url("/assets/fonts/GoogleSans-Regular.woff2") format("woff2");
 }
 @font-face {
   font-family: "Google Sans";
   font-style: normal;
   font-weight: 500;
-  font-display: swap;
-  src: url("/aitrends.now/assets/fonts/GoogleSans-Medium-krSl1Cbs.woff2")
-    format("woff2");
+  src: url("/assets/fonts/GoogleSans-Medium.woff2") format("woff2");
 }
 @font-face {
   font-family: "Google Sans";
   font-style: normal;
   font-weight: 700;
-  font-display: swap;
-  src: url("/aitrends.now/assets/fonts/GoogleSans-Bold-DdUpYAm4.woff2")
-    format("woff2");
+  src: url("/assets/fonts/GoogleSans-Bold.woff2") format("woff2");
 }
-body,
-h1,
-p,
-a,
-span {
-  font-family: "Google Sans", sans-serif !important;
+
+body {
+  font-family: "Google Sans", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 :root {

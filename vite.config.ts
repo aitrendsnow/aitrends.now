@@ -4,6 +4,7 @@ import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import viteCompression from 'vite-plugin-compression';
 import { imagetools } from 'vite-imagetools';
 import { minify } from 'html-minifier-terser';
+import path from 'path';
 
 export default defineConfig(({ mode }) => ({
   plugins: [
@@ -39,27 +40,36 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     cssCodeSplit: false,
+    outDir: 'dist',
+    sourcemap: true,
+    minify: 'terser',
+    target: 'es2020',
+    terserOptions: {
+      compress: { drop_console: true },
+    },
+    assetsInlineLimit: 0,
     rollupOptions: {
       output: {
         assetFileNames: (assetInfo) => {
-          const fileName = assetInfo.name || 'default-asset-name';
-          let extType = fileName.split('.').pop() || 'unknown';
-          if (/png|jpe?g|svg|gif|tiff|bmp|ico|webp/i.test(extType)) extType = 'webp';
-          else if (/woff|woff2/.test(extType)) extType = 'fonts';
-          return `assets/${extType}/[name]-[hash][extname]`;
+          if (!assetInfo.name) {
+            return 'assets/[name]-[hash][extname]';
+          }
+          const extType = path.extname(assetInfo.name).slice(1);
+          if (extType === 'css') {
+            return 'assets/css/[name]-[hash][extname]';
+          }
+          if (extType === 'woff2' || extType === 'woff') {
+            return 'assets/fonts/[name]-[hash][extname]';
+          }
+          if (extType === 'webp' || extType === 'png' || extType === 'ico') {
+            return 'assets/webp/[name]-[hash][extname]';
+          }
+          return 'assets/[name]-[hash][extname]';
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
       },
     },
-    outDir: 'dist',
-    sourcemap: true,
-    minify: 'terser',
-    target: 'esnext',
-    terserOptions: {
-      compress: { drop_console: true },
-    },
-    assetsInlineLimit: 0,
   },
   base: '/aitrends.now/',
 }));
