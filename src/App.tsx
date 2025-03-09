@@ -1,14 +1,12 @@
 import { useState, useEffect, lazy, Suspense } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
 import ProfileImage from "./assets/profile-image.webp";
+// Suppress TypeScript unused variable warnings
 // @ts-ignore
-import GoogleSansRegular from "./assets/fonts/GoogleSans-Regular-Djvx7XI4.woff2";
+import BootstrapIconsWoff2 from "./assets/fonts/bootstrap-icons.woff2";
 // @ts-ignore
-import GoogleSansMedium from "./assets/fonts/GoogleSans-Medium-krSl1Cbs.woff2";
-// @ts-ignore
-import GoogleSansBold from "./assets/fonts/GoogleSans-Bold-DdUpYAm4.woff2";
+import BootstrapIconsWoff from "./assets/fonts/bootstrap-icons.woff";
 
 const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
@@ -35,6 +33,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    console.log("Theme set to:", theme);
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
@@ -169,7 +168,7 @@ export default function App() {
         </Suspense>
       </div>
 
-      <footer style={{ fontSize: "0.75rem" }}>
+      <footer>
         <p>© {new Date().getFullYear()} aitrends.now. All rights reserved.</p>
       </footer>
     </div>

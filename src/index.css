@@ -21,10 +21,12 @@
   src: url("/src/assets/fonts/GoogleSans-Bold.woff2") format("woff2");
 }
 
-body {
-  font-family: "Google Sans", "Roboto", sans-serif; /* Roboto as fallback */
-  margin: 0;
-  padding: 0;
+/* Use imported Bootstrap Icons fonts */
+@font-face {
+  font-family: "bootstrap-icons";
+  font-display: swap;
+  src: url("./assets/fonts/bootstrap-icons.woff2") format("woff2"),
+    url("./assets/fonts/bootstrap-icons.woff") format("woff");
 }
 
 :root {
@@ -34,6 +36,7 @@ body {
   --button-bg: #e9ecef;
   --button-text: #000000;
   --button-hover-border: #646cff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
   color-scheme: light dark;
 }
 
@@ -44,6 +47,7 @@ html[data-theme="dark"] {
   --button-bg: #3a3a4c;
   --button-text: rgba(255, 255, 255, 0.87);
   --button-hover-border: #535bf2;
+  --shadow-color: rgba(255, 255, 255, 0.1);
 }
 
 html,
@@ -51,9 +55,9 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: "Google Sans", "Helvetica Neue", system-ui, Arial, sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  font-family: "Google Sans", "Helvetica Neue", system-ui, Arial, sans-serif !important;
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -81,6 +85,7 @@ footer {
   height: 3.125rem;
   font-size: 0.75rem;
   color: var(--footer-text);
+  background-color: var(--background-color);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -105,7 +110,7 @@ p {
 }
 
 a {
-  color: #646cff;
+  color: var(--button-hover-border);
   text-decoration: none;
 }
 
@@ -146,11 +151,7 @@ button {
 }
 
 .theme-switcher-btn:hover i.bi {
-  color: #666;
-}
-
-html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
-  color: #ccc;
+  color: var(--text-color);
 }
 
 .profile-section {
@@ -174,7 +175,7 @@ html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
   border-radius: 50%;
   border: 3px solid var(--text-color);
   object-fit: cover;
-  box-shadow: 0 0 0.5rem 0.1rem var(--shadow-color); /* Rounded, uniform shadow */
+  box-shadow: 0 0 0.5rem 0.1rem var(--shadow-color);
 }
 
 .profile-username {
@@ -200,21 +201,12 @@ html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
 }
 
 .links-section {
-  min-height: 200px; /* Adjust based on content height */
+  min-height: 200px;
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Consistent spacing */
-}
-.links-section a {
-  display: inline-block; /* Prevent reflow */
-  min-width: 100px; /* Adjust as needed */
-}
-
-.links-section {
+  gap: 10px;
   width: 100%;
   max-width: 25rem;
-  display: flex;
-  flex-direction: column;
   align-items: center;
 }
 
@@ -225,7 +217,7 @@ html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
   min-height: 3.125rem;
   max-height: 4.375rem;
   padding: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.3rem; /* Adjusted from 1rem to 0.3rem */
   background-color: var(--button-bg);
   color: var(--text-color);
   border-radius: 0.5rem;
@@ -320,7 +312,7 @@ html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
   width: 90%;
   background: var(--background-color);
   border-radius: 0.75rem;
-  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.25rem 0.75rem var(--shadow-color);
   z-index: 1050;
 }
 
@@ -367,13 +359,13 @@ html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
 .modal-close-btn {
   padding: 0;
   font-size: 1rem;
-  color: #cccccc;
+  color: var(--footer-text);
   background: none;
   border: none;
 }
 
 .modal-close-btn:hover {
-  color: #999999;
+  color: var(--text-color);
 }
 
 .position-absolute.top-0.end-0.p-3 .modal-close-btn {
@@ -428,7 +420,7 @@ html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
   font-weight: 500;
   padding: 0.5rem 1rem;
   background: var(--button-hover-border);
-  color: #fff;
+  color: var(--button-text);
   border: none;
   border-radius: 0.5rem;
   width: fit-content;
@@ -443,6 +435,21 @@ html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
 .modal-message {
   font-size: 1rem;
   text-align: center;
+}
+
+.btn {
+  background-color: var(--button-bg) !important;
+  color: var(--button-text) !important;
+  border: none !important;
+}
+
+.btn:hover {
+  background-color: var(--button-hover-border) !important;
+  color: var(--button-text) !important;
+}
+
+.text-muted {
+  color: var(--footer-text) !important;
 }
 
 @media (min-width: 768px) {
