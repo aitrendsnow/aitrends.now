@@ -3,23 +3,26 @@
   font-family: "Google Sans";
   font-style: normal;
   font-weight: 400;
-  src: url("/assets/fonts/GoogleSans-Regular.woff2") format("woff2");
+  font-display: swap;
+  src: url("/src/assets/fonts/GoogleSans-Regular.woff2") format("woff2");
 }
 @font-face {
   font-family: "Google Sans";
   font-style: normal;
   font-weight: 500;
-  src: url("/assets/fonts/GoogleSans-Medium.woff2") format("woff2");
+  font-display: swap;
+  src: url("/src/assets/fonts/GoogleSans-Medium.woff2") format("woff2");
 }
 @font-face {
   font-family: "Google Sans";
   font-style: normal;
   font-weight: 700;
-  src: url("/assets/fonts/GoogleSans-Bold.woff2") format("woff2");
+  font-display: swap;
+  src: url("/src/assets/fonts/GoogleSans-Bold.woff2") format("woff2");
 }
 
 body {
-  font-family: "Google Sans", sans-serif;
+  font-family: "Google Sans", "Roboto", sans-serif; /* Roboto as fallback */
   margin: 0;
   padding: 0;
 }
@@ -194,6 +197,17 @@ html[data-theme="dark"] .theme-switcher-btn:hover i.bi {
     width: 7.5rem;
     height: 7.5rem;
   }
+}
+
+.links-section {
+  min-height: 200px; /* Adjust based on content height */
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Consistent spacing */
+}
+.links-section a {
+  display: inline-block; /* Prevent reflow */
+  min-width: 100px; /* Adjust as needed */
 }
 
 .links-section {
