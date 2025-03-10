@@ -1,12 +1,7 @@
 import { useState, useEffect, lazy, Suspense } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css"; // Load Bootstrap here
 import "./index.css";
 import ProfileImage from "./assets/profile-image.webp";
-// Suppress TypeScript unused variable warnings
-// @ts-ignore
-import BootstrapIconsWoff2 from "./assets/fonts/bootstrap-icons.woff2";
-// @ts-ignore
-import BootstrapIconsWoff from "./assets/fonts/bootstrap-icons.woff";
 
 const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
