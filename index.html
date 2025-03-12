@@ -34,6 +34,14 @@
   <meta name="twitter:image:alt" content="aitrends.now logo">
 
   <style>
+    @font-face {
+      font-family: "Google Sans";
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url("/src/assets/fonts/GoogleSans-Bold.woff2") format("woff2");
+    }
+
     .profile-username {
       font-family: "Google Sans", "Helvetica Neue", system-ui, Arial, sans-serif;
       font-size: 3.125rem;
@@ -42,27 +50,11 @@
       line-height: 1.2;
       margin: 0.625rem 0 0;
     }
-
-    .profile-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 2rem;
-    }
-
-    .main-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 1.25rem;
-      text-align: center;
-    }
   </style>
-  <!-- Preload critical fonts -->
   <link rel="preload" href="/src/assets/fonts/GoogleSans-Bold.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/src/assets/fonts/bootstrap-icons.woff2" as="font" type="font/woff2" crossorigin />
+  <!-- Defer non-critical CSS -->
+  <link rel="stylesheet" href="/src/index.css" media="print" onload="this.media='all'" />
 </head>
 
 <body>
