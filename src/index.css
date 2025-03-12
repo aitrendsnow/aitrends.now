@@ -3,20 +3,20 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("/src/assets/fonts/GoogleSans-Regular.woff2") format("woff2");
+  src: url("/assets/fonts/GoogleSans-Regular.woff2") format("woff2");
 }
 @font-face {
   font-family: "Google Sans";
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url("/src/assets/fonts/GoogleSans-Medium.woff2") format("woff2");
+  src: url("/assets/fonts/GoogleSans-Medium.woff2") format("woff2");
 }
 @font-face {
   font-family: "bootstrap-icons";
   font-display: swap;
-  src: url("/src/assets/fonts/bootstrap-icons.woff2") format("woff2"),
-    url("/src/assets/fonts/bootstrap-icons.woff") format("woff");
+  src: url("/assets/fonts/bootstrap-icons.woff2") format("woff2"),
+    url("/assets/fonts/bootstrap-icons.woff") format("woff");
 }
 
 :root {
