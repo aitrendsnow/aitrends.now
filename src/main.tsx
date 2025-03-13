@@ -7,9 +7,9 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "./assets/fonts/bootstrap-icons.woff2";
 import "./assets/fonts/bootstrap-icons.woff";
 
-import "./assets/fonts/GoogleSans-Regular.woff2";
 import "./assets/fonts/GoogleSans-Medium.woff2";
 import "./assets/fonts/GoogleSans-Bold.woff2";
+import "/src/assets/fonts/GoogleSans-Regular.woff2";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
