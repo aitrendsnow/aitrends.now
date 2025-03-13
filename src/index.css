@@ -1,17 +1,18 @@
 @font-face {
   font-family: "Google Sans";
   font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/src/assets/fonts/GoogleSans-Regular.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Google Sans";
-  font-style: normal;
   font-weight: 500;
   font-display: swap;
   src: url("/src/assets/fonts/GoogleSans-Medium.woff2") format("woff2");
 }
+@font-face {
+  font-family: "Google Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/src/assets/fonts/GoogleSans-Regular.woff2") format("woff2");
+}
+
 @font-face {
   font-family: "bootstrap-icons";
   font-display: swap;
