@@ -1,12 +1,9 @@
 import { useState, useRef, ReactNode, useEffect } from "react";
-import React from "react"; // Import React!
 import { Modal, Button, Form, Image } from "react-bootstrap";
 
 const EBOOK_DOWNLOAD_URL =
   "https://github.com/user-attachments/files/18716974/Mastering.DeepSeek_.Unleashing.Hidden.Features.Secret.Tricks.Powerful.Prompts.pdf";
-
-const LOGO_PATH = "/aitrends.now/profile-image.webp";
-
+const LOGO_PATH = "src/assets/profile-image.webp";
 const GOOGLE_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzKz03CLv6V5lePGZpqOOj_Fp6-xP-sug01kXdbLncRuv_ayirbbWLRvB9jdmKA0e8zaA/exec";
 
@@ -40,9 +37,7 @@ const EbookDownload = () => {
       const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email }),
       });
 
@@ -92,7 +87,9 @@ const EbookDownload = () => {
       </div>
     );
   }
+
   if (!isClient) return null;
+
   return (
     <>
       <Modal
