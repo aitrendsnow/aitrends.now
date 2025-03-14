@@ -71,5 +71,5 @@ export default defineConfig(({ mode }) => ({
       },
     },
   },
-  base: mode === 'development' ? '/' : '/aitrends-now/',
+  base: '/aitrends.now/',
 }));
