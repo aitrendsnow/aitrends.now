@@ -73,3 +73,6 @@ export default defineConfig(({ mode }) => ({
   },
   base: '/aitrends.now/',
 }));
+
+
+
