@@ -1,9 +1,10 @@
 import { useState, useRef, ReactNode, useEffect } from "react";
 import { Modal, Button, Form, Image } from "react-bootstrap";
+import ProfileImage from "../assets/profile-image.webp";
 
 const EBOOK_DOWNLOAD_URL =
   "https://github.com/user-attachments/files/18716974/Mastering.DeepSeek_.Unleashing.Hidden.Features.Secret.Tricks.Powerful.Prompts.pdf";
-const LOGO_PATH = "src/assets/profile-image.webp";
+
 const GOOGLE_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzKz03CLv6V5lePGZpqOOj_Fp6-xP-sug01kXdbLncRuv_ayirbbWLRvB9jdmKA0e8zaA/exec";
 
@@ -121,7 +122,7 @@ const EbookDownload = () => {
           <div className="d-flex flex-column align-items-center w-100">
             <div className="d-flex align-items-center gap-3 mb-2">
               <Image
-                src={LOGO_PATH}
+                src={ProfileImage}
                 alt="Ai Trends Logo"
                 height={32}
                 width={32}
