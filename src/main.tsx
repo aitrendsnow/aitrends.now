@@ -3,13 +3,19 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import "bootstrap-icons/font/bootstrap-icons.css";
-// Preload and serve Bootstrap Icons fonts from src/assets/fonts/
-import "./assets/fonts/bootstrap-icons.woff2";
-import "./assets/fonts/bootstrap-icons.woff";
 
-import "./assets/fonts/GoogleSans-Regular.woff2";
-import "./assets/fonts/GoogleSans-Medium.woff2";
-import "./assets/fonts/GoogleSans-Bold.woff2";
+// Automatically load hashed fonts
+const fonts = import.meta.glob("/assets/fonts/*.woff2", { eager: true });
+
+Object.values(fonts).forEach((font) => {
+  const link = document.createElement("link");
+  link.rel = "preload";
+  link.href = (font as { default: string }).default;
+  link.as = "font";
+  link.type = "font/woff2";
+  link.crossOrigin = "anonymous";
+  document.head.appendChild(link);
+});
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
