@@ -7,14 +7,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const distCssPath = path.join(__dirname, "../dist/assets/css");
+const fontsPath = path.join(__dirname, "../dist/assets/fonts/");
 
-// Read all built CSS files and replace incorrect font paths
 async function fixFontPaths() {
   try {
-    const cssFiles = await readdir(distCssPath);
-    const fontsPath = path.join(__dirname, "../dist/assets/fonts/");
+    // Get the correct hashed font filename
     const fontFiles = await readdir(fontsPath);
-
     const googleSansRegular = fontFiles.find(
       (f) => f.startsWith("GoogleSans-Regular") && f.endsWith(".woff2")
     );
@@ -24,19 +22,25 @@ async function fixFontPaths() {
       return;
     }
 
+    console.log(`🔍 Found GoogleSans-Regular: ${googleSansRegular}`);
+
+    // Process all CSS files in dist/assets/css/
+    const cssFiles = await readdir(distCssPath);
     for (const file of cssFiles) {
       if (file.endsWith(".css")) {
         const filePath = path.join(distCssPath, file);
         let cssContent = await readFile(filePath, "utf8");
 
-        // Replace incorrect font reference with the hashed filename
-        cssContent = cssContent.replace(
-          /url\(\"\.\/assets\/fonts\/GoogleSans-Regular\.woff2\"\)/g,
-          `url("./assets/fonts/${googleSansRegular}")`
-        );
+        // Replace all incorrect references in CSS
+        if (cssContent.includes("GoogleSans-Regular.woff2")) {
+          cssContent = cssContent.replace(
+            /url\(\"\.\/assets\/fonts\/GoogleSans-Regular\.woff2\"\)/g,
+            `url("./assets/fonts/${googleSansRegular}")`
+          );
 
-        await writeFile(filePath, cssContent, "utf8");
-        console.log(`✅ Fixed GoogleSans-Regular reference in ${file}`);
+          await writeFile(filePath, cssContent, "utf8");
+          console.log(`✅ Fixed GoogleSans-Regular reference in ${file}`);
+        }
       }
     }
   } catch (error) {
