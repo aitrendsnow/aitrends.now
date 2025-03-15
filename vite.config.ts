@@ -61,6 +61,7 @@ export default defineConfig(({ mode }) => ({
           if (extType === 'woff2' || extType === 'woff') {
             return 'assets/fonts/[name]-[hash][extname]';
           }
+          
           if (extType === 'webp' || extType === 'png' || extType === 'ico') {
             return 'assets/webp/[name]-[hash][extname]';
           }
