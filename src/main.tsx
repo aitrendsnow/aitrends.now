@@ -4,13 +4,13 @@ import "./index.css";
 import App from "./App";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-// Automatically load hashed fonts
-const fonts = import.meta.glob("/assets/fonts/*.woff2", { eager: true });
+// ✅ Fix: Corrected font path & improved TypeScript handling
+const fonts = import.meta.glob("./assets/fonts/*.woff2", { eager: true });
 
-Object.values(fonts).forEach((font) => {
+Object.values(fonts).forEach((font: any) => {
   const link = document.createElement("link");
   link.rel = "preload";
-  link.href = (font as { default: string }).default;
+  link.href = font.default; // ✅ Direct access without unnecessary casting
   link.as = "font";
   link.type = "font/woff2";
   link.crossOrigin = "anonymous";
