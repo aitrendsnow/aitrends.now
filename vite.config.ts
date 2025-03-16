@@ -40,17 +40,17 @@ export default defineConfig(({ mode }) => ({
       generateBundle(options, bundle) {
         const fontMap = {};
 
-        // Find hashed font files and store mappings
+        // Step 1: Map hashed font filenames
         Object.keys(bundle).forEach((fileName) => {
           if (fileName.startsWith('assets/fonts/GoogleSans-') && fileName.endsWith('.woff2')) {
-            const match = fileName.match(/(GoogleSans-[A-Za-z]+)\.woff2/);
+            const match = fileName.match(/(GoogleSans-[A-Za-z]+)-[A-Za-z0-9]+\.woff2/);
             if (match) {
               fontMap[match[1]] = fileName;
             }
           }
         });
 
-        // Process all CSS files and replace font references
+        // Step 2: Replace font paths inside CSS files
         for (const file in bundle) {
           const asset = bundle[file];
 
@@ -60,7 +60,7 @@ export default defineConfig(({ mode }) => ({
             Object.entries(fontMap).forEach(([originalFont, hashedFont]) => {
               const originalPath = `./assets/fonts/${originalFont}.woff2`;
               const hashedPath = `../${hashedFont}`;
-              cssContent = cssContent.replace(originalPath, hashedPath);
+              cssContent = cssContent.replace(new RegExp(originalPath, 'g'), hashedPath);
             });
 
             asset.source = cssContent;
