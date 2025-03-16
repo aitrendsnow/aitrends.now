@@ -34,6 +34,36 @@ export default defineConfig(({ mode }) => ({
         });
       },
     },
+    {
+      name: 'fix-font-paths',
+      enforce: 'post',
+      generateBundle(options, bundle) {
+        for (const file in bundle) {
+          const asset = bundle[file];
+
+          // Process only CSS files
+          if (asset.type === 'asset' && file.endsWith('.css') && typeof asset.source === 'string') {
+            let cssContent = asset.source;
+
+            // Find all hashed fonts
+            const fontFiles = Object.keys(bundle).filter(f =>
+              f.startsWith('assets/fonts/GoogleSans-') && f.endsWith('.woff2')
+            );
+
+            fontFiles.forEach(fontFile => {
+              const originalFontName = fontFile.match(/GoogleSans-[A-Za-z]+/);
+              if (originalFontName) {
+                const originalFont = `./assets/fonts/${originalFontName[0]}.woff2`;
+                cssContent = cssContent.replace(originalFont, `../${fontFile}`);
+              }
+            });
+
+            asset.source = cssContent;
+            console.log(`✅ Fixed font paths in ${file}`);
+          }
+        }
+      },
+    },
   ],
   css: {
     postcss: './postcss.config.js',
@@ -61,7 +91,6 @@ export default defineConfig(({ mode }) => ({
           if (extType === 'woff2' || extType === 'woff') {
             return 'assets/fonts/[name]-[hash][extname]';
           }
-          
           if (extType === 'webp' || extType === 'png' || extType === 'ico') {
             return 'assets/webp/[name]-[hash][extname]';
           }
