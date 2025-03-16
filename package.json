@@ -6,10 +6,10 @@
   "homepage": "https://aitrendsnow.github.io/aitrends.now",
  "scripts": {
   "dev": "vite --host",
-  "build": "tsc -b && vite build && node scripts/fix-font-paths.js && critical dist/index.html --base dist --css assets/style-*.css --width 1440 --height 900 --target dist/index.html && node scripts/inject-preload.js",
+  "build": "tsc -b && vite build && critical dist/index.html --base dist --css assets/style-*.css --width 1440 --height 900 --target dist/index.html && node scripts/inject-preload.js",
   "lint": "eslint .",
   "preview": "vite preview",
-  "deploy": "vite build && gh-pages -d dist"
+  "deploy": "npm run build && gh-pages -d dist"
 },
   "dependencies": {
     "bootstrap": "^5.3.3",
