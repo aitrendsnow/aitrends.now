@@ -70,8 +70,8 @@ export default defineConfig(({ mode }) => ({
       },
     },
   ],
-  optimizeDeps: {
-    exclude: ['react-bootstrap'], // Exclude react-bootstrap from pre-bundling to fix "use client" errors
+  css: {
+    postcss: './postcss.config.js',
   },
   build: {
     cssCodeSplit: false,
@@ -84,7 +84,6 @@ export default defineConfig(({ mode }) => ({
     },
     assetsInlineLimit: 0,
     rollupOptions: {
-      external: ['react-bootstrap'], // Prevent Vite from bundling react-bootstrap
       output: {
         assetFileNames: (assetInfo) => {
           if (!assetInfo.name) {
@@ -95,7 +94,7 @@ export default defineConfig(({ mode }) => ({
             return 'assets/css/[name]-[hash][extname]';
           }
           if (extType === 'woff2' || extType === 'woff') {
-            return 'assets/fonts/[name]-[hash][extname]';
+            return 'assets/fonts/[name][extname]'; // Ensure fonts keep their original names
           }
           if (extType === 'webp' || extType === 'png' || extType === 'ico') {
             return 'assets/webp/[name]-[hash][extname]';
@@ -105,6 +104,17 @@ export default defineConfig(({ mode }) => ({
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
       },
+    },
+  },
+  optimizeDeps: {
+    include: ['react-bootstrap'],
+    esbuildOptions: {
+      target: 'esnext',
+    },
+  },
+  resolve: {
+    alias: {
+      'react-bootstrap': 'react-bootstrap'
     },
   },
   base: '/aitrends.now/',
