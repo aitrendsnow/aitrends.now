@@ -38,24 +38,29 @@ export default defineConfig(({ mode }) => ({
       name: 'fix-font-paths',
       enforce: 'post',
       generateBundle(options, bundle) {
+        const fontMap = {};
+
+        // Find hashed font files and store mappings
+        Object.keys(bundle).forEach((fileName) => {
+          if (fileName.startsWith('assets/fonts/GoogleSans-') && fileName.endsWith('.woff2')) {
+            const match = fileName.match(/(GoogleSans-[A-Za-z]+)\.woff2/);
+            if (match) {
+              fontMap[match[1]] = fileName;
+            }
+          }
+        });
+
+        // Process all CSS files and replace font references
         for (const file in bundle) {
           const asset = bundle[file];
 
-          // Process only CSS files
           if (asset.type === 'asset' && file.endsWith('.css') && typeof asset.source === 'string') {
             let cssContent = asset.source;
 
-            // Find all hashed fonts
-            const fontFiles = Object.keys(bundle).filter(f =>
-              f.startsWith('assets/fonts/GoogleSans-') && f.endsWith('.woff2')
-            );
-
-            fontFiles.forEach(fontFile => {
-              const originalFontName = fontFile.match(/GoogleSans-[A-Za-z]+/);
-              if (originalFontName) {
-                const originalFont = `./assets/fonts/${originalFontName[0]}.woff2`;
-                cssContent = cssContent.replace(originalFont, `../${fontFile}`);
-              }
+            Object.entries(fontMap).forEach(([originalFont, hashedFont]) => {
+              const originalPath = `./assets/fonts/${originalFont}.woff2`;
+              const hashedPath = `../${hashedFont}`;
+              cssContent = cssContent.replace(originalPath, hashedPath);
             });
 
             asset.source = cssContent;
