@@ -4,20 +4,20 @@
   "version": "0.0.0",
   "type": "module",
   "homepage": "https://aitrendsnow.github.io/aitrends.now",
- "scripts": {
-  "dev": "vite --host",
-  "build": "tsc -b && vite build && critical dist/index.html --base dist --css assets/style-*.css --width 1440 --height 900 --target dist/index.html && node scripts/inject-preload.js",
-  "lint": "eslint .",
-  "preview": "vite preview",
-  "deploy": "npm run build && gh-pages -d dist"
-},
+  "scripts": {
+    "dev": "vite --host",
+    "build": "tsc -b && vite build && critical dist/index.html --base dist --css assets/style-*.css --width 1440 --height 900 --target dist/index.html && node scripts/inject-preload.js",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "deploy": "npm run build && gh-pages -d dist"
+  },
   "dependencies": {
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "puppeteer": "^24.3.0",
-    "react": "^18.3.1",
+    "react": "^19.0.0",
     "react-bootstrap": "^2.10.9",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.0.0",
     "rimraf": "^6.0.1",
     "vite-imagetools": "^7.0.5"
   },

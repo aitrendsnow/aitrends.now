@@ -70,8 +70,8 @@ export default defineConfig(({ mode }) => ({
       },
     },
   ],
-  css: {
-    postcss: './postcss.config.js',
+  optimizeDeps: {
+    exclude: ['react-bootstrap'], // Exclude react-bootstrap from pre-bundling to fix "use client" errors
   },
   build: {
     cssCodeSplit: false,
@@ -84,6 +84,7 @@ export default defineConfig(({ mode }) => ({
     },
     assetsInlineLimit: 0,
     rollupOptions: {
+      external: ['react-bootstrap'], // Prevent Vite from bundling react-bootstrap
       output: {
         assetFileNames: (assetInfo) => {
           if (!assetInfo.name) {
