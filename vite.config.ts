@@ -71,8 +71,8 @@ export default defineConfig(({ mode }) => ({
               Object.entries(fontMap).forEach(([originalFont, hashedFont]) => {
                 const regex = new RegExp(`([\\.\\/]*assets\\/fonts\\/)?${originalFont}\\.(woff2|woff)(?!-[A-Za-z0-9]+)`, 'g');
                 if (regex.test(cssContent)) {
-                  cssContent = cssContent.replace(regex, `./${hashedFont}`);
-                  console.log(`Replaced ${originalFont} with ${hashedFont} in ${fileName}`);
+                  cssContent = cssContent.replace(regex, `/aitrends.now/${hashedFont}`); // Use absolute path with base
+                  console.log(`Replaced ${originalFont} with /aitrends.now/${hashedFont} in ${fileName}`);
                 } else {
                   console.log(`No unhashed match for ${originalFont} in ${fileName}`);
                 }
@@ -124,5 +124,5 @@ export default defineConfig(({ mode }) => ({
     },
     conditions: ['browser'],
   },
-  base: '/aitrends.now/', // Ensure this matches your GitHub Pages repo path
+  base: '/aitrends.now/', 
 }));
