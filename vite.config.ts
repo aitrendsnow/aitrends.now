@@ -1,5 +1,5 @@
 // vite.config.ts
-import { defineConfig, Plugin } from 'vite';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import viteCompression from 'vite-plugin-compression';
@@ -11,8 +11,8 @@ import { OutputBundle, OutputAsset } from 'rollup';
 export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
-    ViteMinifyPlugin(), 
-    viteCompression({ algorithm: 'brotliCompress' }), 
+    ViteMinifyPlugin(),
+    viteCompression({ algorithm: 'brotliCompress' }),
     imagetools({
       defaultDirectives: (url) => {
         if (mode === 'production' && url.pathname.includes('profile-image.webp')) {
@@ -41,8 +41,6 @@ export default defineConfig(({ mode }) => ({
       enforce: 'post',
       generateBundle(options, bundle: OutputBundle) {
         const fontMap: { [key: string]: string } = {};
-
-        // Step 1: Build the font map with hashed filenames
         Object.keys(bundle).forEach((fileName) => {
           if (fileName.startsWith('assets/fonts/GoogleSans-') && fileName.endsWith('.woff2')) {
             const match = fileName.match(/(GoogleSans-[A-Za-z]+)-[A-Za-z0-9]+\.woff2/);
@@ -58,24 +56,18 @@ export default defineConfig(({ mode }) => ({
           }
         });
         console.log('fontMap:', fontMap);
-
-        // Step 2: Process CSS files with enhanced debugging
         console.log('Bundle entries:', Object.keys(bundle));
         Object.keys(bundle).forEach((fileName) => {
           const asset = bundle[fileName];
           if ('source' in asset) {
             const outputAsset = asset as OutputAsset;
             console.log(`Inspecting ${fileName}:`, { type: outputAsset.type, sourceType: typeof outputAsset.source });
-
             if (fileName.endsWith('.css')) {
               const cssContentOriginal = Buffer.isBuffer(outputAsset.source)
                 ? outputAsset.source.toString('utf8')
                 : outputAsset.source as string;
               let cssContent = cssContentOriginal;
-
               console.log(`Processing ${fileName}, original content:`, cssContent);
-
-              // Replace unhashed font paths with hashed ones
               Object.entries(fontMap).forEach(([originalFont, hashedFont]) => {
                 const regex = new RegExp(`([\\.\\/]*assets\\/fonts\\/)?${originalFont}\\.(woff2|woff)(?!-[A-Za-z0-9]+)`, 'g');
                 if (regex.test(cssContent)) {
@@ -85,8 +77,6 @@ export default defineConfig(({ mode }) => ({
                   console.log(`No unhashed match for ${originalFont} in ${fileName}`);
                 }
               });
-
-              // Only update if content changed (avoid unnecessary overwrites)
               if (cssContent !== cssContentOriginal) {
                 console.log(`Updated content for ${fileName}:`, cssContent);
                 outputAsset.source = cssContent;
@@ -113,12 +103,11 @@ export default defineConfig(({ mode }) => ({
     },
     assetsInlineLimit: 0,
     rollupOptions: {
-      external: ['react-bootstrap'],
+      // Removed 'react-bootstrap' from external
       output: {
         assetFileNames: (assetInfo) => {
           const name = assetInfo.name ?? 'unknown';
           const extType = path.extname(name).slice(1);
-
           if (extType === 'css') return 'assets/css/[name]-[hash][extname]';
           if (['woff2', 'woff'].includes(extType)) return 'assets/fonts/[name]-[hash][extname]';
           if (['webp', 'png', 'ico'].includes(extType)) return 'assets/webp/[name]-[hash][extname]';
@@ -135,5 +124,5 @@ export default defineConfig(({ mode }) => ({
     },
     conditions: ['browser'],
   },
-  base: '/aitrends.now/',
+  base: '/aitrends.now/', // Ensure this matches your GitHub Pages repo path
 }));
