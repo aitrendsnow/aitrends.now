@@ -55,35 +55,28 @@ export default defineConfig(({ mode }) => ({
             }
           }
         });
-        console.log('fontMap:', fontMap);
-        console.log('Bundle entries:', Object.keys(bundle));
+
         Object.keys(bundle).forEach((fileName) => {
           const asset = bundle[fileName];
           if ('source' in asset) {
             const outputAsset = asset as OutputAsset;
-            console.log(`Inspecting ${fileName}:`, { type: outputAsset.type, sourceType: typeof outputAsset.source });
             if (fileName.endsWith('.css')) {
               const cssContentOriginal = Buffer.isBuffer(outputAsset.source)
                 ? outputAsset.source.toString('utf8')
                 : outputAsset.source as string;
               let cssContent = cssContentOriginal;
-              console.log(`Processing ${fileName}, original content:`, cssContent);
+
               Object.entries(fontMap).forEach(([originalFont, hashedFont]) => {
                 const regex = new RegExp(`([\\.\\/]*assets\\/fonts\\/)?${originalFont}\\.(woff2|woff)(?!-[A-Za-z0-9]+)`, 'g');
                 if (regex.test(cssContent)) {
-                  cssContent = cssContent.replace(regex, `/aitrends.now/${hashedFont}`); // Use absolute path with base
-                  console.log(`Replaced ${originalFont} with /aitrends.now/${hashedFont} in ${fileName}`);
-                } else {
-                  console.log(`No unhashed match for ${originalFont} in ${fileName}`);
+                  cssContent = cssContent.replace(regex, `/aitrends.now/${hashedFont}`);
                 }
               });
+
               if (cssContent !== cssContentOriginal) {
-                console.log(`Updated content for ${fileName}:`, cssContent);
                 outputAsset.source = cssContent;
               }
             }
-          } else {
-            console.log(`Skipping ${fileName}: No source property (type: ${asset.type})`);
           }
         });
       },
@@ -103,7 +96,6 @@ export default defineConfig(({ mode }) => ({
     },
     assetsInlineLimit: 0,
     rollupOptions: {
-      // Removed 'react-bootstrap' from external
       output: {
         assetFileNames: (assetInfo) => {
           const name = assetInfo.name ?? 'unknown';
@@ -116,6 +108,12 @@ export default defineConfig(({ mode }) => ({
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
       },
+      onwarn(warning, warn) {
+        if (warning.message.includes('"use client"') || warning.message.includes("Can't resolve original location of error")) {
+          return; // Suppress both types of warnings
+        }
+        warn(warning);
+      },
     },
   },
   resolve: {
@@ -124,5 +122,5 @@ export default defineConfig(({ mode }) => ({
     },
     conditions: ['browser'],
   },
-  base: '/aitrends.now/', 
+  base: '/aitrends.now/',
 }));
