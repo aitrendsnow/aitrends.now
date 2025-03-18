@@ -88,12 +88,9 @@ export default defineConfig(({ mode }) => ({
   build: {
     cssCodeSplit: false,
     outDir: 'dist',
-    sourcemap: true,
-    minify: 'terser',
+    sourcemap: false, // Disable sourcemaps for production
+    minify: 'esbuild', // Switch to esbuild for faster minification
     target: 'es2020',
-    terserOptions: {
-      compress: { drop_console: true },
-    },
     assetsInlineLimit: 0,
     rollupOptions: {
       output: {
@@ -110,7 +107,7 @@ export default defineConfig(({ mode }) => ({
       },
       onwarn(warning, warn) {
         if (warning.message.includes('"use client"') || warning.message.includes("Can't resolve original location of error")) {
-          return; // Suppress both types of warnings
+          return;
         }
         warn(warning);
       },
