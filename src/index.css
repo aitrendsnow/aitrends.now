@@ -295,12 +295,13 @@ button {
   }
 }
 
+/* Modal Styles */
 .simple-modal {
   position: relative;
   padding: 2px;
   background: none;
+  color: inherit;
   border-radius: 0.75rem;
-  box-shadow: 0 0.25rem 0.75rem var(--shadow-color);
   z-index: 1050;
 }
 
@@ -308,15 +309,31 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0;
-  width: 100%;
+  margin: 0 auto;
+  max-width: 100%;
 }
 
+/* Only modal-content gets background and shadow */
 .modal-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  background-color: var(--modal-bg) !important;
+  color: var(--text-color) !important;
+  box-shadow: 0 0.25rem 0.75rem var(--shadow-color);
+  border-radius: 0.75rem;
+}
+
+/* Explicitly set light mode styles */
+html:not([data-theme="dark"]) .modal-content {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+html[data-theme="dark"] .modal-content {
+  background-color: #2c2c3a !important;
+  color: rgba(255, 255, 255, 0.87) !important;
 }
 
 .simple-modal-header {
@@ -326,6 +343,8 @@ button {
   padding: 1rem;
   width: 100%;
   border-bottom: none;
+  background: none;
+  color: var(--text-color);
 }
 
 .simple-modal-header .d-flex.align-items-center {
@@ -369,10 +388,17 @@ button {
   width: 100%;
 }
 
+/* Override description text color in dark mode */
+html[data-theme="dark"] .simple-modal-header .small.text-muted {
+  color: #ffffff !important;
+}
+
 .simple-modal-body {
   padding: 1rem;
   text-align: center;
   width: 100%;
+  background: none;
+  color: var(--text-color);
 }
 
 .modal-form {
@@ -423,6 +449,15 @@ button {
 .modal-message {
   font-size: 1rem;
   text-align: center;
+  color: var(--text-color);
+}
+
+.modal-message.text-success {
+  color: #28a745;
+}
+
+.modal-message.text-danger {
+  color: #dc3545;
 }
 
 .btn {
