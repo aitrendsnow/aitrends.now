@@ -1,5 +1,5 @@
 import { useState, useEffect, lazy, Suspense } from "react";
-import "bootstrap/dist/css/bootstrap.min.css"; // Load Bootstrap here
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import ProfileImage from "./assets/profile-image.webp";
 
