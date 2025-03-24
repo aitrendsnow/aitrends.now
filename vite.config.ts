@@ -111,10 +111,7 @@ export default defineConfig(({ mode }) => ({
           if (id.includes('node_modules/react-bootstrap/')) {
             return 'react-bootstrap'; // react-bootstrap in its own chunk
           }
-          if (id.includes('src/components/EbookDownload')) {
-            return 'ebook-download'; // EbookDownload in its own chunk
-          }
-          // Everything else stays in index-DWUw9FLA.js or other chunks
+          // Let Vite handle EbookDownload via lazy loading
         },
       },
       onwarn(warning, warn) {
@@ -123,7 +120,7 @@ export default defineConfig(({ mode }) => ({
           warning.message.includes("Can't resolve original location of error") ||
           warning.message.includes("dynamic import will not move module into another chunk")
         ) {
-          return; // Suppress dynamic import warnings too
+          return;
         }
         warn(warning);
       },
