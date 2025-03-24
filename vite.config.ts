@@ -108,10 +108,7 @@ export default defineConfig(({ mode }) => ({
           if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
             return 'vendor'; // React and ReactDOM in one chunk
           }
-          if (id.includes('node_modules/react-bootstrap/')) {
-            return 'react-bootstrap'; // react-bootstrap in its own chunk
-          }
-          // Let Vite handle EbookDownload via lazy loading
+          // Remove react-bootstrap manual chunk; let it bundle with EbookDownload
         },
       },
       onwarn(warning, warn) {
