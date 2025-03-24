@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import ProfileImage from "./assets/profile-image.webp";
 
+// Lazy-load EbookDownload
 const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
 const isAppBrowser = (() => {
@@ -28,7 +29,6 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    console.log("Theme set to:", theme);
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
@@ -158,6 +158,8 @@ export default function App() {
             </div>
           ))}
         </div>
+
+        {/* Lazy-loaded EbookDownload */}
         <Suspense fallback={<span>Loading eBook...</span>}>
           <EbookDownload />
         </Suspense>

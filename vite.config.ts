@@ -88,8 +88,8 @@ export default defineConfig(({ mode }) => ({
   build: {
     cssCodeSplit: false,
     outDir: 'dist',
-    sourcemap: false, // Disable sourcemaps for production
-    minify: 'esbuild', // Switch to esbuild for faster minification
+    sourcemap: false,
+    minify: 'esbuild',
     target: 'es2020',
     assetsInlineLimit: 0,
     rollupOptions: {
@@ -104,10 +104,26 @@ export default defineConfig(({ mode }) => ({
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
+        manualChunks: (id) => {
+          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
+            return 'vendor'; // React and ReactDOM in one chunk
+          }
+          if (id.includes('node_modules/react-bootstrap/')) {
+            return 'react-bootstrap'; // react-bootstrap in its own chunk
+          }
+          if (id.includes('src/components/EbookDownload')) {
+            return 'ebook-download'; // EbookDownload in its own chunk
+          }
+          // Everything else stays in index-DWUw9FLA.js or other chunks
+        },
       },
       onwarn(warning, warn) {
-        if (warning.message.includes('"use client"') || warning.message.includes("Can't resolve original location of error")) {
-          return;
+        if (
+          warning.message.includes('"use client"') ||
+          warning.message.includes("Can't resolve original location of error") ||
+          warning.message.includes("dynamic import will not move module into another chunk")
+        ) {
+          return; // Suppress dynamic import warnings too
         }
         warn(warning);
       },
