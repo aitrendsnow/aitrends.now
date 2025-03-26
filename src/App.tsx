@@ -21,6 +21,7 @@ const isAppBrowser = (() => {
 
 export default function App() {
   const [theme, setTheme] = useState("light");
+  const [isLoaded, setIsLoaded] = useState(false); // New state for animation trigger
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
@@ -32,6 +33,10 @@ export default function App() {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    setIsLoaded(true); // Trigger animations after mount
+  }, []);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
@@ -76,7 +81,7 @@ export default function App() {
     },
     {
       platform: "Twitter - X",
-      url: "https://x.com/aitrendnow",
+      url: "https://x.com/aitrendsnow", // Updated to match your branding
       icon: "bi-twitter-x",
     },
     {
@@ -136,35 +141,36 @@ export default function App() {
           </p>
         </div>
 
-        <div className="links-section">
-          {socialLinks.map((link, index) => (
-            <div
-              className={`link-card ${link.special ? "special" : ""}`}
-              key={index}
-            >
-              <a
-                href={link.url}
-                target={link.action ? "_self" : "_blank"}
-                rel={link.action ? "" : "noopener noreferrer"}
-                onClick={(e) => handleLinkClick(e, link.action)}
+        {isLoaded && (
+          <div className="links-section">
+            {socialLinks.map((link) => (
+              <div
+                className={`link-card ${link.special ? "special" : ""}`}
+                key={link.platform} // Stable key
               >
-                <i className={`bi ${link.icon}`}></i>
-                <span>{link.platform}</span>
-              </a>
-              <span
-                className="link-options"
-                onClick={() => handleShare(link.platform, link.url)}
-                role="button"
-                tabIndex={0}
-                aria-label={`Share ${link.platform} link`}
-              >
-                ⋮
-              </span>
-            </div>
-          ))}
-        </div>
+                <a
+                  href={link.url}
+                  target={link.action ? "_self" : "_blank"}
+                  rel={link.action ? "" : "noopener noreferrer"}
+                  onClick={(e) => handleLinkClick(e, link.action)}
+                >
+                  <i className={`bi ${link.icon}`} aria-hidden="true"></i>
+                  <span>{link.platform}</span>
+                </a>
+                <span
+                  className="link-options"
+                  onClick={() => handleShare(link.platform, link.url)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Share ${link.platform} link`}
+                >
+                  ⋮
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
 
-        {/* Lazy-loaded EbookDownload */}
         <Suspense fallback={<span>Loading eBook...</span>}>
           <EbookDownload />
         </Suspense>
