@@ -80,7 +80,7 @@ export default function App() {
     },
     {
       platform: "Twitter - X",
-      url: "https://x.com/aitrendsnow",
+      url: "https://x.com/aitrendnow",
       icon: "bi-twitter-x",
     },
     {
