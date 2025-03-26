@@ -197,7 +197,7 @@ button {
 }
 
 .links-section {
-  min-height: 200px;
+  min-height: 350px;
   display: flex;
   flex-direction: column;
   gap: 10px;
