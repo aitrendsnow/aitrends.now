@@ -75,6 +75,11 @@ export default function App() {
       icon: "bi-chat-square-text",
     },
     {
+      platform: "Twitter - X",
+      url: "https://x.com/aitrendnow",
+      icon: "bi-twitter-x",
+    },
+    {
       platform: "Instagram",
       url: "https://instagram.com/aitrends.now",
       icon: "bi-instagram",
