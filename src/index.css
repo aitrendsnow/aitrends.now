@@ -139,6 +139,9 @@ button {
 
 .theme-switcher-btn i.bi {
   font-size: 1.5rem;
+  width: 1.5rem; /* Match link-card icons */
+  height: 1.5rem;
+  display: inline-block;
   color: var(--button-text);
 }
 
@@ -162,8 +165,9 @@ button {
 }
 
 .profile-image {
-  width: 100%;
-  height: 100%;
+  width: 80px; /* Match HTML width */
+  height: 80px; /* Match HTML height */
+  object-fit: cover; /* Ensure image fits without distortion */
   border-radius: 50%;
   border: 3px solid var(--text-color);
   object-fit: cover;

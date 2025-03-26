@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import ProfileImage from "./assets/profile-image.webp";
 
-// Lazy-load EbookDownload
 const EbookDownload = lazy(() => import("./components/EbookDownload"));
 
 const isAppBrowser = (() => {
@@ -21,7 +20,7 @@ const isAppBrowser = (() => {
 
 export default function App() {
   const [theme, setTheme] = useState("light");
-  const [isLoaded, setIsLoaded] = useState(false); // New state for animation trigger
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
@@ -35,7 +34,7 @@ export default function App() {
   }, [theme]);
 
   useEffect(() => {
-    setIsLoaded(true); // Trigger animations after mount
+    setIsLoaded(true);
   }, []);
 
   const toggleTheme = () => {
@@ -81,7 +80,7 @@ export default function App() {
     },
     {
       platform: "Twitter - X",
-      url: "https://x.com/aitrendsnow", // Updated to match your branding
+      url: "https://x.com/aitrendsnow",
       icon: "bi-twitter-x",
     },
     {
@@ -146,7 +145,7 @@ export default function App() {
             {socialLinks.map((link) => (
               <div
                 className={`link-card ${link.special ? "special" : ""}`}
-                key={link.platform} // Stable key
+                key={link.platform}
               >
                 <a
                   href={link.url}
