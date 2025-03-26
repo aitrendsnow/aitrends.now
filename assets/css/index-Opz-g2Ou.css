@@ -204,7 +204,7 @@ button {
   width: 100%;
   max-width: 25rem;
   align-items: center;
-  overflow: hidden; /* Prevents overflow during animation */
+  overflow: hidden;
 }
 
 .link-card {
@@ -214,7 +214,7 @@ button {
   min-height: 3.125rem;
   max-height: 4.375rem;
   padding: 1rem;
-  margin-bottom: 0.3rem; /* Kept your adjustment */
+  margin-bottom: 0.3rem;
   background-color: var(--button-bg);
   color: var(--text-color);
   border-radius: 0.5rem;
@@ -222,7 +222,8 @@ button {
   position: relative;
   gap: 0.8rem;
   transition: background-color 0.3s ease, color 0.3s ease;
-  opacity: 0; /* Start hidden for animation */
+  opacity: 0;
+  font-size: 1rem;
 }
 
 /* Alternating animations */
