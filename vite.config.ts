@@ -37,6 +37,16 @@ export default defineConfig(({ mode }) => ({
       },
     },
     {
+      name: 'preload-fonts',
+      transformIndexHtml(html) {
+        // Inject preload for bootstrap-icons.woff2
+        return html.replace(
+          '</head>',
+          '<link rel="preload" href="/aitrends.now/assets/fonts/bootstrap-icons.woff2" as="font" type="font/woff2" crossorigin></head>'
+        );
+      },
+    },
+    {
       name: 'fix-font-paths-late',
       enforce: 'post',
       generateBundle(options, bundle: OutputBundle) {
@@ -108,7 +118,7 @@ export default defineConfig(({ mode }) => ({
           if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
             return 'vendor'; // React and ReactDOM in one chunk
           }
-          // Remove react-bootstrap manual chunk; let it bundle with EbookDownload
+          // react-bootstrap bundles with EbookDownload
         },
       },
       onwarn(warning, warn) {
@@ -131,5 +141,3 @@ export default defineConfig(({ mode }) => ({
   },
   base: '/aitrends.now/',
 }));
-
-//orig config
