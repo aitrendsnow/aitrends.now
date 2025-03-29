@@ -20,7 +20,6 @@ const isAppBrowser = (() => {
 
 export default function App() {
   const [theme, setTheme] = useState("light");
-  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
@@ -33,10 +32,6 @@ export default function App() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
@@ -45,15 +40,11 @@ export default function App() {
     if (!isAppBrowser && navigator.share) {
       try {
         await navigator.share({ title, url });
-        console.log("Content shared successfully");
       } catch (error: any) {
-        console.error("Error sharing content:", error);
         if (error.name !== "AbortError") {
           alert("Sharing failed. Please try again.");
         }
       }
-    } else {
-      console.log("Native share sheet should handle sharing.");
     }
   };
 
@@ -79,15 +70,11 @@ export default function App() {
       icon: "bi-chat-square-text",
     },
     {
-      platform: "Twitter - X",
-      url: "https://x.com/aitrendnow",
-      icon: "bi-twitter-x",
-    },
-    {
       platform: "Instagram",
       url: "https://instagram.com/aitrends.now",
       icon: "bi-instagram",
     },
+    { platform: "X", url: "https://x.com/aitrends.now", icon: "bi-twitter-x" },
     {
       platform: "Mastering Deepseek (eBook)",
       url: "#ebook",
@@ -140,36 +127,33 @@ export default function App() {
           </p>
         </div>
 
-        {isLoaded && (
-          <div className="links-section">
-            {socialLinks.map((link) => (
-              <div
-                className={`link-card ${link.special ? "special" : ""}`}
-                key={link.platform}
+        <div className="links-section">
+          {socialLinks.map((link) => (
+            <div
+              className={`link-card ${link.special ? "special" : ""}`}
+              key={link.platform}
+            >
+              <a
+                href={link.url}
+                target={link.action ? "_self" : "_blank"}
+                rel={link.action ? "" : "noopener noreferrer"}
+                onClick={(e) => handleLinkClick(e, link.action)}
               >
-                <a
-                  href={link.url}
-                  target={link.action ? "_self" : "_blank"}
-                  rel={link.action ? "" : "noopener noreferrer"}
-                  onClick={(e) => handleLinkClick(e, link.action)}
-                >
-                  <i className={`bi ${link.icon}`} aria-hidden="true"></i>
-                  <span>{link.platform}</span>
-                </a>
-                <span
-                  className="link-options"
-                  onClick={() => handleShare(link.platform, link.url)}
-                  role="button"
-                  tabIndex={0}
-                  aria-label={`Share ${link.platform} link`}
-                >
-                  ⋮
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
-
+                <i className={`bi ${link.icon}`} aria-hidden="true"></i>
+                <span>{link.platform}</span>
+              </a>
+              <span
+                className="link-options"
+                onClick={() => handleShare(link.platform, link.url)}
+                role="button"
+                tabIndex={0}
+                aria-label={`Share ${link.platform} link`}
+              >
+                ⋮
+              </span>
+            </div>
+          ))}
+        </div>
         <Suspense fallback={<span>Loading eBook...</span>}>
           <EbookDownload />
         </Suspense>

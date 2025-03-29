@@ -175,6 +175,7 @@ button {
 }
 
 .profile-username {
+  font-family: "GoogleSans-Regular", sans-serif;
   font-size: 3.125rem;
   font-weight: 700;
   letter-spacing: -0.09rem;
