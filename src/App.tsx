@@ -26,17 +26,20 @@ export default function App() {
     const savedTheme = localStorage.getItem("theme") || "light";
     setTheme(savedTheme);
     document.documentElement.setAttribute("data-theme", savedTheme);
-    // Delay animations until after DOM is painted
-    const timer = setTimeout(() => {
-      setAnimateLinks(true);
-    }, 100); // 100ms delay ensures LCP completes
-    return () => clearTimeout(timer); // Cleanup
   }, []);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    // Delay animations further to ensure LCP completes
+    const timer = setTimeout(() => {
+      setAnimateLinks(true);
+    }, 500); // 500ms delay after mount
+    return () => clearTimeout(timer);
+  }, []);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
@@ -101,6 +104,17 @@ export default function App() {
 
   return (
     <div className="wrapper d-flex flex-column min-vh-100">
+      {/* Inline style to force early <h1> render */}
+      <style>
+        {`
+          .profile-username {
+            font-family: "Google Sans", system-ui, Arial, sans-serif !important;
+            font-weight: 400;
+            visibility: visible !important;
+          }
+        `}
+      </style>
+
       <button
         onClick={toggleTheme}
         className="theme-switcher-btn position-absolute top-0 end-0 m-3"

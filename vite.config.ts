@@ -10,7 +10,8 @@ import { OutputBundle, OutputAsset } from 'rollup';
 
 export default defineConfig(({ mode }) => {
   let bootstrapIconsFontPath = '';
-  let googleSansFontPath = '';
+  let googleSansRegularFontPath = ''; // Renamed for clarity
+  let googleSansMediumFontPath = '';  // Added for Medium weight
 
   return {
     plugins: [
@@ -48,7 +49,10 @@ export default defineConfig(({ mode }) => {
               bootstrapIconsFontPath = `/aitrends.now/${fileName}`;
             }
             if (fileName.startsWith('assets/fonts/GoogleSans-Regular') && fileName.endsWith('.woff2')) {
-              googleSansFontPath = `/aitrends.now/${fileName}`;
+              googleSansRegularFontPath = `/aitrends.now/${fileName}`;
+            }
+            if (fileName.startsWith('assets/fonts/GoogleSans-Medium') && fileName.endsWith('.woff2')) {
+              googleSansMediumFontPath = `/aitrends.now/${fileName}`;
             }
           });
         },
@@ -57,8 +61,11 @@ export default defineConfig(({ mode }) => {
           if (bootstrapIconsFontPath) {
             preloads += `<link rel="preload" href="${bootstrapIconsFontPath}" as="font" type="font/woff2" crossorigin>`;
           }
-          if (googleSansFontPath) {
-            preloads += `<link rel="preload" href="${googleSansFontPath}" as="font" type="font/woff2" crossorigin>`;
+          if (googleSansRegularFontPath) {
+            preloads += `<link rel="preload" href="${googleSansRegularFontPath}" as="font" type="font/woff2" crossorigin>`;
+          }
+          if (googleSansMediumFontPath) {
+            preloads += `<link rel="preload" href="${googleSansMediumFontPath}" as="font" type="font/woff2" crossorigin>`;
           }
           return html.replace('</head>', `${preloads}</head>`);
         },
