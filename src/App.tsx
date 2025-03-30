@@ -20,11 +20,17 @@ const isAppBrowser = (() => {
 
 export default function App() {
   const [theme, setTheme] = useState("light");
+  const [animateLinks, setAnimateLinks] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     setTheme(savedTheme);
     document.documentElement.setAttribute("data-theme", savedTheme);
+    // Delay animations until after DOM is painted
+    const timer = setTimeout(() => {
+      setAnimateLinks(true);
+    }, 100); // 100ms delay ensures LCP completes
+    return () => clearTimeout(timer); // Cleanup
   }, []);
 
   useEffect(() => {
@@ -74,7 +80,11 @@ export default function App() {
       url: "https://instagram.com/aitrends.now",
       icon: "bi-instagram",
     },
-    { platform: "X", url: "https://x.com/aitrends.now", icon: "bi-twitter-x" },
+    {
+      platform: "Twitter - X",
+      url: "https://x.com/aitrends.now",
+      icon: "bi-twitter-x",
+    },
     {
       platform: "Mastering Deepseek (eBook)",
       url: "#ebook",
@@ -127,7 +137,7 @@ export default function App() {
           </p>
         </div>
 
-        <div className="links-section">
+        <div className={`links-section ${animateLinks ? "animate" : ""}`}>
           {socialLinks.map((link) => (
             <div
               className={`link-card ${link.special ? "special" : ""}`}

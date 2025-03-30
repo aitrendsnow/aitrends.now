@@ -10,6 +10,7 @@ import { OutputBundle, OutputAsset } from 'rollup';
 
 export default defineConfig(({ mode }) => {
   let bootstrapIconsFontPath = '';
+  let googleSansFontPath = '';
 
   return {
     plugins: [
@@ -46,16 +47,20 @@ export default defineConfig(({ mode }) => {
             if (fileName.startsWith('assets/fonts/bootstrap-icons') && fileName.endsWith('.woff2')) {
               bootstrapIconsFontPath = `/aitrends.now/${fileName}`;
             }
+            if (fileName.startsWith('assets/fonts/GoogleSans-Regular') && fileName.endsWith('.woff2')) {
+              googleSansFontPath = `/aitrends.now/${fileName}`;
+            }
           });
         },
         transformIndexHtml(html) {
+          let preloads = '';
           if (bootstrapIconsFontPath) {
-            return html.replace(
-              '</head>',
-              `<link rel="preload" href="${bootstrapIconsFontPath}" as="font" type="font/woff2" crossorigin></head>`
-            );
+            preloads += `<link rel="preload" href="${bootstrapIconsFontPath}" as="font" type="font/woff2" crossorigin>`;
           }
-          return html;
+          if (googleSansFontPath) {
+            preloads += `<link rel="preload" href="${googleSansFontPath}" as="font" type="font/woff2" crossorigin>`;
+          }
+          return html.replace('</head>', `${preloads}</head>`);
         },
       },
       {
@@ -103,7 +108,7 @@ export default defineConfig(({ mode }) => {
           });
         },
       },
-    ], // End of plugins array
+    ],
     css: {
       postcss: './postcss.config.js',
     },

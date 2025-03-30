@@ -170,14 +170,13 @@ button {
   object-fit: cover;
   border-radius: 50%;
   border: 3px solid var(--text-color);
-  object-fit: cover;
   box-shadow: 0 0 0.5rem 0.1rem var(--shadow-color);
 }
 
 .profile-username {
-  font-family: "GoogleSans-Regular", sans-serif;
+  font-family: "Google Sans", sans-serif; /* Match @font-face */
   font-size: 3.125rem;
-  font-weight: 700;
+  font-weight: 400; /* Use 400 for Regular, 700 needs Medium */
   letter-spacing: -0.09rem;
   line-height: 1.2;
   margin: 0.625rem 0 0;
@@ -223,44 +222,43 @@ button {
   position: relative;
   gap: 0.8rem;
   transition: background-color 0.3s ease, color 0.3s ease;
-  opacity: 0;
-  font-size: 1rem;
+  opacity: 0; /* Hidden until animated */
 }
 
-/* Alternating animations */
-.link-card:nth-child(odd) {
-  animation: slideInFromLeft 0.5s ease-out forwards; /* Left for odd */
+/* Alternating animations triggered by .animate */
+.links-section.animate .link-card:nth-child(odd) {
+  animation: slideInFromLeft 0.4s ease-out forwards;
 }
 
-.link-card:nth-child(even) {
-  animation: slideInFromRight 0.5s ease-out forwards; /* Right for even */
+.links-section.animate .link-card:nth-child(even) {
+  animation: slideInFromRight 0.4s ease-out forwards;
 }
 
-/* Stagger delays for each card */
-.link-card:nth-child(1) {
+/* Stagger delays */
+.links-section.animate .link-card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.links-section.animate .link-card:nth-child(2) {
   animation-delay: 0.1s;
 }
-.link-card:nth-child(2) {
+.links-section.animate .link-card:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.links-section.animate .link-card:nth-child(4) {
   animation-delay: 0.2s;
 }
-.link-card:nth-child(3) {
+.links-section.animate .link-card:nth-child(5) {
+  animation-delay: 0.25s;
+}
+.links-section.animate .link-card:nth-child(6) {
   animation-delay: 0.3s;
 }
-.link-card:nth-child(4) {
-  animation-delay: 0.4s;
-}
-.link-card:nth-child(5) {
-  animation-delay: 0.5s;
-}
-.link-card:nth-child(6) {
-  animation-delay: 0.6s;
-} /* Covers your 6 links */
 
 /* Slide-in animations */
 @keyframes slideInFromLeft {
   0% {
     opacity: 0;
-    transform: translateX(-100%);
+    transform: translateX(-50%); /* Reduced from -100% for faster slide */
   }
   100% {
     opacity: 1;
@@ -271,7 +269,7 @@ button {
 @keyframes slideInFromRight {
   0% {
     opacity: 0;
-    transform: translateX(100%);
+    transform: translateX(50%); /* Reduced from 100% */
   }
   100% {
     opacity: 1;
@@ -280,9 +278,9 @@ button {
 }
 
 /* First card: Combine slide-in with pulse */
-.link-card:first-child {
-  animation: slideInFromLeft 0.5s ease-out forwards,
-    quickScalePulse 0.8s infinite ease-in-out 0.5s;
+.links-section.animate .link-card:first-child {
+  animation: slideInFromLeft 0.4s ease-out forwards,
+    quickScalePulse 0.8s infinite ease-in-out 0.4s;
 }
 
 /* Existing styles unchanged */
@@ -384,7 +382,6 @@ button {
   max-width: 100%;
 }
 
-/* Only modal-content gets background and shadow */
 .modal-content {
   display: flex;
   flex-direction: column;
@@ -396,7 +393,6 @@ button {
   border-radius: 0.75rem;
 }
 
-/* Explicitly set light mode styles */
 html:not([data-theme="dark"]) .modal-content {
   background-color: #ffffff !important;
   color: #000000 !important;
@@ -459,7 +455,6 @@ html[data-theme="dark"] .modal-content {
   width: 100%;
 }
 
-/* Override description text color in dark mode */
 html[data-theme="dark"] .simple-modal-header .small.text-muted {
   color: #ffffff !important;
 }
