@@ -174,16 +174,16 @@ button {
 }
 
 .profile-username {
-  font-family: "Google Sans", sans-serif; /* Match @font-face */
+  font-family: "Google Sans", sans-serif;
   font-size: 3.125rem;
-  font-weight: 400; /* Use 400 for Regular, 700 needs Medium */
+  font-weight: 600;
   letter-spacing: -0.09rem;
   line-height: 1.2;
   margin: 0.625rem 0 0;
 }
 
 .profile-description {
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 400;
   letter-spacing: -0.015rem;
   line-height: 1.5;

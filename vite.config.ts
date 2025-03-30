@@ -10,8 +10,8 @@ import { OutputBundle, OutputAsset } from 'rollup';
 
 export default defineConfig(({ mode }) => {
   let bootstrapIconsFontPath = '';
-  let googleSansRegularFontPath = ''; // Renamed for clarity
-  let googleSansMediumFontPath = '';  // Added for Medium weight
+  let googleSansRegularFontPath = '';
+  let googleSansMediumFontPath = '';
 
   return {
     plugins: [
@@ -42,7 +42,7 @@ export default defineConfig(({ mode }) => {
         },
       },
       {
-        name: 'preload-fonts',
+        name: 'preload-fonts-and-critical-css',
         generateBundle(options, bundle: OutputBundle) {
           Object.keys(bundle).forEach((fileName) => {
             if (fileName.startsWith('assets/fonts/bootstrap-icons') && fileName.endsWith('.woff2')) {
@@ -67,7 +67,21 @@ export default defineConfig(({ mode }) => {
           if (googleSansMediumFontPath) {
             preloads += `<link rel="preload" href="${googleSansMediumFontPath}" as="font" type="font/woff2" crossorigin>`;
           }
-          return html.replace('</head>', `${preloads}</head>`);
+          // Inline critical CSS for .profile-username
+          const criticalCSS = `
+            <style>
+              .profile-username {
+                font-family: system-ui, Arial, sans-serif;
+                font-size: 3.125rem;
+                font-weight: 400;
+                letter-spacing: -0.09rem;
+                line-height: 1.2;
+                margin: 0.625rem 0 0;
+                visibility: visible !important;
+              }
+            </style>
+          `;
+          return html.replace('</head>', `${preloads}${criticalCSS}</head>`);
         },
       },
       {
