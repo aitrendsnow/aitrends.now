@@ -160,7 +160,7 @@ button {
   display: block;
   width: 6.25rem;
   height: 6.25rem;
-  margin: 0 auto -1.25rem; /* Reduced from 1rem to 0.5rem (8px) */
+  margin: 0 auto 0.5rem; /* Reduced from 1rem to 0.5rem (8px) */
   overflow: hidden;
 }
 
