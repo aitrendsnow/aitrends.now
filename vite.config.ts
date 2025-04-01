@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => {
   let bootstrapIconsFontPath = '';
   let googleSansRegularFontPath = '';
   let googleSansMediumFontPath = '';
+  let cssPath = '';
 
   return {
     plugins: [
@@ -54,6 +55,9 @@ export default defineConfig(({ mode }) => {
             if (fileName.startsWith('assets/fonts/GoogleSans-Medium') && fileName.endsWith('.woff2')) {
               googleSansMediumFontPath = `/aitrends.now/${fileName}`;
             }
+            if (fileName.startsWith('assets/css/index') && fileName.endsWith('.css')) {
+              cssPath = `/aitrends.now/${fileName}`;
+            }
           });
         },
         transformIndexHtml(html) {
@@ -72,16 +76,21 @@ export default defineConfig(({ mode }) => {
             <style>
               .profile-username {
                 font-family: system-ui, Arial, sans-serif;
-                font-size: 3.125rem;
-                font-weight: 400;
+                font-size: 3rem;
+                font-weight: 600;
                 letter-spacing: -0.09rem;
                 line-height: 1.2;
                 margin: 0.625rem 0 0;
                 visibility: visible !important;
+                text-align: center;
               }
             </style>
           `;
-          return html.replace('</head>', `${preloads}${criticalCSS}</head>`);
+          // Defer full CSS
+          const deferredCSS = cssPath
+            ? `<link rel="stylesheet" href="${cssPath}" media="print" onload="this.media='all'">`
+            : '';
+          return html.replace('</head>', `${preloads}${criticalCSS}${deferredCSS}</head>`);
         },
       },
       {
