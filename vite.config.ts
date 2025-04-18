@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => {
   let bootstrapIconsFontPath = '';
   let googleSansRegularFontPath = '';
   let googleSansMediumFontPath = '';
+  let googleSansBoldFontPath = ''; // New
   let cssPath = '';
 
   return {
@@ -21,12 +22,22 @@ export default defineConfig(({ mode }) => {
       viteCompression({ algorithm: 'brotliCompress' }),
       imagetools({
         defaultDirectives: (url) => {
-          if (mode === 'production' && url.pathname.includes('profile-image.webp')) {
-            return new URLSearchParams({
-              width: '80',
-              format: 'webp',
-              quality: '60',
-            });
+          if (mode === 'production') {
+            if (url.pathname.includes('profile-image.webp')) {
+              return new URLSearchParams({
+                width: '80',
+                format: 'webp',
+                quality: '60',
+              });
+            }
+            if (url.pathname.includes('social-share.webp')) {
+              return new URLSearchParams({
+                width: '1200',
+                height: '630',
+                format: 'webp',
+                quality: '80',
+              });
+            }
           }
           return new URLSearchParams();
         },
@@ -55,6 +66,9 @@ export default defineConfig(({ mode }) => {
             if (fileName.startsWith('assets/fonts/GoogleSans-Medium') && fileName.endsWith('.woff2')) {
               googleSansMediumFontPath = `/aitrends.now/${fileName}`;
             }
+            if (fileName.startsWith('assets/fonts/GoogleSans-Bold') && fileName.endsWith('.woff2')) {
+              googleSansBoldFontPath = `/aitrends.now/${fileName}`;
+            }
             if (fileName.startsWith('assets/css/index') && fileName.endsWith('.css')) {
               cssPath = `/aitrends.now/${fileName}`;
             }
@@ -71,16 +85,19 @@ export default defineConfig(({ mode }) => {
           if (googleSansMediumFontPath) {
             preloads += `<link rel="preload" href="${googleSansMediumFontPath}" as="font" type="font/woff2" crossorigin>`;
           }
+          if (googleSansBoldFontPath) {
+            preloads += `<link rel="preload" href="${googleSansBoldFontPath}" as="font" type="font/woff2" crossorigin>`;
+          }
           // Inline critical CSS for .profile-username
           const criticalCSS = `
             <style>
               .profile-username {
                 font-family: system-ui, Arial, sans-serif;
-                font-size: 3rem;
+                font-size: 3.125rem;
                 font-weight: 600;
                 letter-spacing: -0.09rem;
                 line-height: 1.2;
-                margin: 0.625rem 0 0;
+                margin: 0.25rem 0 0;
                 visibility: visible !important;
                 text-align: center;
               }
