@@ -85,7 +85,7 @@ export default function App() {
     },
     {
       platform: "Twitter - X",
-      url: "https://x.com/aitrends.now",
+      url: "https://x.com/aitrendnow",
       icon: "bi-twitter-x",
     },
     {
@@ -136,7 +136,8 @@ export default function App() {
           </picture>
           <h1 className="profile-username">aitrends.now</h1>
           <p className="profile-description">
-            Tech enthusiast. Follow for updates & a shared love for tech.
+            Tech enthusiast. Follow for updates & a shared love for tech and
+            innovations.
           </p>
         </div>
 
