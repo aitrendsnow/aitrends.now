@@ -186,7 +186,7 @@ button {
   font-size: 1rem;
   font-weight: 400;
   letter-spacing: -0.015rem;
-  line-height: 1.5;
+  line-height: 1.2;
 }
 
 @media (min-width: 1024px) {
