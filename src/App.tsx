@@ -89,13 +89,18 @@ export default function App() {
       icon: "bi-twitter-x",
     },
     {
+      platform: "Whatsapp Channel",
+      url: "https://whatsapp.com/channel/0029VbAhIIMJuyAHEJXq2u2n",
+      icon: "bi-whatsapp",
+    },
+    {
       platform: "Mastering Deepseek (eBook)",
       url: "#ebook",
       icon: "bi-book",
       action: "triggerEbookDownload",
     },
     {
-      platform: "GitHub",
+      platform: "GitHub - a code to our website",
       url: "https://github.com/aitrendsnow/aitrends.now",
       icon: "bi-github",
       special: true,
@@ -137,7 +142,7 @@ export default function App() {
           <h1 className="profile-username">aitrends.now</h1>
           <p className="profile-description">
             Tech enthusiast. Follow for updates & a shared love for tech and
-            innovations.
+            innovations. Yes, i am human who just love tech.
           </p>
         </div>
 
